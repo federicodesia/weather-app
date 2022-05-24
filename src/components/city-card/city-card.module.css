@@ -1,0 +1,10 @@
+.container {
+    text-align: center;
+}
+
+.card {
+    height: 164px;
+    width: 130px;
+    background-color: #C4B1E9;
+    border-radius: 18px;
+}

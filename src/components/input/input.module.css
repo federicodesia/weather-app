@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  max-width: 230px;
+
+  box-shadow: rgba(0, 0, 0, 0.025) 0px 0px 16px;
+}
+
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+}
+
+.prefix {
+  margin-right: 12px;
+}

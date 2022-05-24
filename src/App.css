@@ -1,0 +1,25 @@
+.App {
+  background-color: white;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  overflow: auto;
+}
+
+@media only screen and (min-width: 480px) {
+  .App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7DB5F2;
+  }
+
+  .main-container {
+    margin: 24px;
+    border-radius: 12px;
+    background-color: #F3FBFF;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  }
+}

@@ -1,0 +1,17 @@
+.container {
+    padding: 48px 0px;
+    overflow: hidden;
+    width: 640px;
+}
+
+.contentPadding {
+    padding: 0px 48px;
+}
+
+.header {
+    margin: 24px 0px;
+}
+
+.header * {
+    display: inline;
+}
