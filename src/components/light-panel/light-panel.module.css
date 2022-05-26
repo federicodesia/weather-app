@@ -1,11 +1,11 @@
 .container {
     padding: 48px 0px;
     overflow: hidden;
-    width: 640px;
+    width: 680px;
 }
 
 .contentPadding {
-    padding: 0px 48px;
+    padding: 0px 40px;
 }
 
 .header {

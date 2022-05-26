@@ -2,6 +2,8 @@ import styles from './light-panel.module.css';
 
 import Input from '../input/input';
 import CityCard from '../city-card/city-card';
+import DayForecast from '../day-forecast/day-forecast';
+
 import { IoSearchOutline } from 'react-icons/io5';
 
 function LightPanel() {
@@ -20,6 +22,12 @@ function LightPanel() {
         <CityCard name='Berlin, Germany'></CityCard>
         <CityCard name='Paris, France'></CityCard>
         <CityCard name='New York, USA'></CityCard>
+      </div>
+
+      <div className={styles.contentPadding}>
+        <div className='column'>
+          <DayForecast></DayForecast>
+        </div>
       </div>
     </div>
   );
