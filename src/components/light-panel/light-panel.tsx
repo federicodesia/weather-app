@@ -2,7 +2,7 @@ import styles from './light-panel.module.css';
 
 import Input from '../input/input';
 import CityCard from '../city-card/city-card';
-import DayForecast from '../day-forecast/day-forecast';
+import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 import { IoSearchOutline } from 'react-icons/io5';
 
@@ -18,16 +18,45 @@ function LightPanel() {
         </div>
       </div>
 
-      <div className='horizontal-scroll'>
+      <div className='horizontal-scroll start'>
         <CityCard name='Berlin, Germany'></CityCard>
         <CityCard name='Paris, France'></CityCard>
         <CityCard name='New York, USA'></CityCard>
       </div>
 
-      <div className={styles.contentPadding}>
-        <div className='column'>
-          <DayForecast></DayForecast>
-        </div>
+      <div className='horizontal-scroll column'>
+        <NextDaysForecast days={[
+          {
+            dayName: "Sunday",
+            probabilityRain: 54,
+            minTemp: 17,
+            maxTemp: 28
+          },
+          {
+            dayName: "Tuesday",
+            probabilityRain: 54,
+            minTemp: 19,
+            maxTemp: 25
+          },
+          {
+            dayName: "Wednesday",
+            probabilityRain: 54,
+            minTemp: 14,
+            maxTemp: 21
+          },
+          {
+            dayName: "Thursday",
+            probabilityRain: 54,
+            minTemp: 14,
+            maxTemp: 18
+          },
+          {
+            dayName: "Friday",
+            probabilityRain: 54,
+            minTemp: 22,
+            maxTemp: 28
+          }
+        ]}></NextDaysForecast>
       </div>
     </div>
   );

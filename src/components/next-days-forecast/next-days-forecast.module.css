@@ -2,7 +2,7 @@
     border-spacing: 0;
     border-collapse: collapse;
     text-align: center;
-    margin-top: 24px;
+    margin: 16px 0px;
 }
 
 .table th{
@@ -10,6 +10,7 @@
     font-weight: 300;
     text-align: left;
     width: 0px;
+    padding-right: 16px;
 }
 
 .table td{
@@ -18,7 +19,7 @@
     color: rgba(0, 0, 0, 0.45);
 
     margin: 0;
-    padding: 12px 0px;
+    padding: 12px 16px;
     white-space: nowrap;
 }
 
@@ -36,56 +37,39 @@
     color: inherit;
     text-align: right;
     width: 10%;
+    padding-right: 0;
 }
 
-.left{
+.tempBar{
     position: relative;
-    width: 15%;
+    width: 25%;
+    min-width: 100px;
 }
 
-.left *{
-    position: absolute;
-}
-
-.right{
-    position: relative;
-    width: 15%;
-}
-
-.right *{
-    position: absolute;
-}
-
-.left .bar{
-    background-color: #D1E4F8;
+.tempBar .left,
+.tempBar .right{
     border-radius: 4px;
     height: 4px;
-    width: 50%;
     
+    position: absolute;
     top: 50%;
+    left: 0;
     right: 0;
     transform: translate(0, -50%);
 }
 
-.right .bar{
-    background-color: #FA4400;
-    border-radius: 4px;
-    height: 4px;
-    width: 75%;
-    
-    top: 50%;
-    left: 0;
-    transform: translate(0, -50%);
+.tempBar .left{
+    background-color: #D1E4F8;
 }
 
-.horizontalDashedLine{
+.tempBar .right{
+    background-color: #FA4400;
+}
+
+.tempBar .horizontalDashedLine{
     width: 100%;
     height: 1px;
     margin: 0px;
-    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 
     background-image: linear-gradient(
         to right,
@@ -93,18 +77,14 @@
         rgba(0, 0, 0, 0) 0%
     );
     background-position: bottom;
-    background-size: 10px 1px;
+    background-size: 8px 1px;
     background-repeat: repeat-x;
 }
 
-.verticalDashedLine{
+.tempBar .verticalDashedLine{
     width: 1px;
     height: 100%;
     margin: 0px;
-
-    top: 50%;
-    right: 0;
-    transform: translate(50%, -50%);
 
     background-image: linear-gradient(
         rgba(0, 0, 0, 0.15) 50%,

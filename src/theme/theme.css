@@ -70,6 +70,9 @@ h4 {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.column.expand{
   height: 100%;
 }
 
@@ -80,5 +83,16 @@ h4 {
   overflow-x: auto;
 
   padding: 0px 40px;
+  justify-content: stretch;
+}
+
+.horizontal-scroll.start{
   justify-content: start;
+}
+
+.absolute-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

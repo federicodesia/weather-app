@@ -14,7 +14,7 @@ function DarkPanel() {
       </div>
 
       <div className={styles.content}>
-        <div className='column center-items'>
+        <div className='column center-items expand'>
 
           <div className='row center-items'>
             <FaCloudRain size={28} id={styles.todayIcon} />
