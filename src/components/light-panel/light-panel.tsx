@@ -1,16 +1,44 @@
 import styles from './light-panel.module.css';
 
-import Input from '../input/input';
+import SearchBar from '../search-bar/search-bar';
 import CityCard from '../city-card/city-card';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 import { IoSearchOutline } from 'react-icons/io5';
+import { searchCities } from '../../services/weather/weather-service';
+import { SearchCity } from '../../services/weather/weather-models';
 
 function LightPanel() {
+
+  const onSearchCitiesChange = async (value: string) => {
+    const response = await searchCities(value);
+    return (response as SearchCity[]).map(city => {
+
+      const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+      const regionName = regionNames.of(city.country) ?? city.country;
+
+      return {
+        id: city,
+        value: [city.name, city.state, regionName]
+          .filter(value => value !== undefined)
+          .join(', ')
+      }
+    });
+  }
+
+  const onSearchCityClick = (city: SearchCity) => {
+    console.log(`Lat: ${city.lat}, Lon: ${city.lon}`);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.contentPadding}>
-        <Input placeholder='Search new place' prefix={<IoSearchOutline />}></Input>
+
+        <SearchBar
+          placeholder='Search new place'
+          prefix={<IoSearchOutline />}
+          onChange={onSearchCitiesChange}
+          onClick={onSearchCityClick} />
 
         <div className={styles.header}>
           <h2>Weather </h2>
