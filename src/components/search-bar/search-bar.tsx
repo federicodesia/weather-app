@@ -1,11 +1,12 @@
 import styles from './search-bar.module.css';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 import { clamp } from '../../utils/utils';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 type Suggestion = {
-    id: any,
+    item: any
     value: string
 }
 
@@ -13,19 +14,29 @@ type SearchBarProps = {
     placeholder: string
     prefix?: React.ReactNode
     onChange: (value: string) => Promise<Suggestion[]>
-    onClick: (id: any) => void
+    onSelected: (item: any) => void
 }
 
-function SearchBar({ placeholder, prefix, onChange, onClick }: SearchBarProps) {
+function SearchBar({ placeholder, prefix, onChange, onSelected }: SearchBarProps) {
 
     const [value, setValue] = useState<string>('')
     const debouncedValue = useDebounce<string>(value, 500)
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)
 
     const [suggestions, setSuggestions] = useState<Suggestion[]>([])
     const [isExpanded, setExpanded] = useState<boolean>(false)
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value)
+    const containerRef = useRef(null);
+    const handleClickOutside = () => setExpanded(false);
+    const handleClickInside = () => value && !isExpanded && setExpanded(true);
+    useOnClickOutside(containerRef, handleClickOutside)
+
+    const handleSuggestionClick = (item?: any) => {
+        setExpanded(false);
+        if (item) {
+            setValue('');
+            onSelected(item);
+        }
     }
 
     useEffect(() => {
@@ -43,8 +54,7 @@ function SearchBar({ placeholder, prefix, onChange, onClick }: SearchBarProps) {
     }, [debouncedValue])
 
     const getSuggestionsContainerStyle = () => {
-        if(!isExpanded) return {};
-
+        if (!isExpanded) return {};
         const lenght = clamp(suggestions.length, 1)
         return {
             height: `calc(${lenght} * var(--suggestion-height))`,
@@ -53,8 +63,11 @@ function SearchBar({ placeholder, prefix, onChange, onClick }: SearchBarProps) {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.content}>
+        <div
+            className={styles.container}
+            ref={containerRef}
+            onClick={handleClickInside}>
+            <div className={`${styles.content} ${isExpanded && styles.expandedContent}`}>
                 <div className={styles.inputContainer}>
                     {
                         prefix && <div className={styles.prefix}> {prefix} </div>
@@ -73,13 +86,15 @@ function SearchBar({ placeholder, prefix, onChange, onClick }: SearchBarProps) {
                     style={getSuggestionsContainerStyle()}>
                     {
                         isExpanded && suggestions.length === 0
-                            ? <li>No results found</li>
+                            ? <li onClick={() => handleSuggestionClick(null)}>
+                                No results found
+                            </li>
 
                             : suggestions.map((suggestion, index) => {
                                 return <li
                                     key={`${suggestion.value} ${index}`}
-                                    onClick={() => onClick(suggestion.id)}>
-                                        {suggestion.value}
+                                    onClick={() => handleSuggestionClick(suggestion.item)}>
+                                    {suggestion.value}
                                 </li>
                             })
                     }

@@ -4,5 +4,6 @@ export const request = async (
     queryParams: URLSearchParams
 ) => {
     const url = `${baseUrl}/${path}?${queryParams}`;
-    return await fetch(url);
+    const response = await fetch(url);
+    return await response.json();
 }

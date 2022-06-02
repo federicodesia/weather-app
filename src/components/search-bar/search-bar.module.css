@@ -14,25 +14,31 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.025) 0px 0px 16px;
+  transition: ease 0.3s;
+}
+
+.expandedContent{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 16px
 }
 
 .inputContainer {
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-  height: var(--input-height);
-  padding: 0px 18px;
 }
 
 .inputContainer input {
   background: transparent;
+  height: var(--input-height);
+  padding: 0px 18px;
+
   border: none;
   outline: none;
   flex-grow: 1;
 }
 
 .inputContainer .prefix {
-  margin-right: 12px;
+  margin-top: 2px;
+  margin-left: 18px;
 }
 
 .suggestionsContainer{
@@ -44,14 +50,19 @@
   transition: ease 0.5s;
 }
 
-.suggestionsContainer *{
+.suggestionsContainer li{
   display: flex;
   align-items: center;
-  padding-left: 46px;
-  padding-right: 28px;
+  padding-left: 50px;
+  padding-right: 24px;
 
   box-sizing: border-box;
   height: var(--suggestion-height);
   
   cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.suggestionsContainer li:hover{
+  background-color: #EEEEEE;
 }

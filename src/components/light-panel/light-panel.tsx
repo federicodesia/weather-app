@@ -12,21 +12,21 @@ function LightPanel() {
 
   const onSearchCitiesChange = async (value: string) => {
     const response = await searchCities(value);
-    return (response as SearchCity[]).map(city => {
+    return response.map(city => {
 
       const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
       const regionName = regionNames.of(city.country) ?? city.country;
 
       return {
-        id: city,
+        item: city,
         value: [city.name, city.state, regionName]
           .filter(value => value !== undefined)
-          .join(', ')
+          .join(', '),
       }
     });
   }
 
-  const onSearchCityClick = (city: SearchCity) => {
+  const onSearchCitySelected = (city: SearchCity) => {
     console.log(`Lat: ${city.lat}, Lon: ${city.lon}`);
   }
 
@@ -38,7 +38,7 @@ function LightPanel() {
           placeholder='Search new place'
           prefix={<IoSearchOutline />}
           onChange={onSearchCitiesChange}
-          onClick={onSearchCityClick} />
+          onSelected={onSearchCitySelected} />
 
         <div className={styles.header}>
           <h2>Weather </h2>
