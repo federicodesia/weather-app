@@ -5,28 +5,23 @@ import CityCard from '../city-card/city-card';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 import { IoSearchOutline } from 'react-icons/io5';
-import { searchCities } from '../../services/weather/weather-service';
-import { SearchCity } from '../../services/weather/weather-models';
+import { useContext } from 'react';
+import { CityContext } from '../../context/city-context';
+import joinArray from '../../utils/join-array';
+import { CityData } from '../../interfaces/interfaces';
 
 function LightPanel() {
 
-  const onSearchCitiesChange = async (value: string) => {
-    const response = await searchCities(value);
-    return response.map(city => {
+  const { cityState, searchCity } = useContext(CityContext)
 
-      const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
-      const regionName = regionNames.of(city.country) ?? city.country;
+  const suggestions = cityState.searchSuggestions.map(city => {
+    return {
+      item: city,
+      value: joinArray([city.name, city.state, city.country])
+    }
+  })
 
-      return {
-        item: city,
-        value: [city.name, city.state, regionName]
-          .filter(value => value !== undefined)
-          .join(', '),
-      }
-    });
-  }
-
-  const onSearchCitySelected = (city: SearchCity) => {
+  const onSearchCitySelected = (city: CityData) => {
     console.log(`Lat: ${city.lat}, Lon: ${city.lon}`);
   }
 
@@ -37,7 +32,8 @@ function LightPanel() {
         <SearchBar
           placeholder='Search new place'
           prefix={<IoSearchOutline />}
-          onChange={onSearchCitiesChange}
+          suggestions={suggestions}
+          onSearch={searchCity}
           onSelected={onSearchCitySelected} />
 
         <div className={styles.header}>

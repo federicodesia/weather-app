@@ -1,4 +1,4 @@
-export const request = async (
+const request = async (
     baseUrl: string,
     path: string,
     queryParams: URLSearchParams
@@ -7,3 +7,5 @@ export const request = async (
     const response = await fetch(url);
     return await response.json();
 }
+
+export default request

@@ -1,29 +1,25 @@
 import styles from './search-bar.module.css';
 
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import useDebounce from '../../hooks/useDebounce';
-import { clamp } from '../../utils/utils';
-import useOnClickOutside from '../../hooks/useOnClickOutside';
-
-type Suggestion = {
-    item: any
-    value: string
-}
+import useDebounce from '../../hooks/use-debounce';
+import useOnClickOutside from '../../hooks/use-on-click-outside';
+import { Suggestion } from '../../interfaces/interfaces';
+import clamp from '../../utils/clamp';
 
 type SearchBarProps = {
     placeholder: string
     prefix?: React.ReactNode
-    onChange: (value: string) => Promise<Suggestion[]>
+    suggestions: Suggestion[]
+    onSearch: (value: string) => void
     onSelected: (item: any) => void
 }
 
-function SearchBar({ placeholder, prefix, onChange, onSelected }: SearchBarProps) {
+function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: SearchBarProps) {
 
     const [value, setValue] = useState<string>('')
     const debouncedValue = useDebounce<string>(value, 500)
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)
 
-    const [suggestions, setSuggestions] = useState<Suggestion[]>([])
     const [isExpanded, setExpanded] = useState<boolean>(false)
 
     const containerRef = useRef(null);
@@ -33,25 +29,19 @@ function SearchBar({ placeholder, prefix, onChange, onSelected }: SearchBarProps
 
     const handleSuggestionClick = (item?: any) => {
         setExpanded(false);
-        if (item) {
+        if(item){
             setValue('');
             onSelected(item);
         }
     }
 
     useEffect(() => {
-        if (debouncedValue) {
-            const callback = async () => {
-                setSuggestions(await onChange(debouncedValue));
-                setExpanded(true);
-            }
-            callback().catch(console.error);
-        }
-        else {
-            setSuggestions([]);
-            setExpanded(false);
-        }
+        onSearch(debouncedValue)
     }, [debouncedValue])
+
+    useEffect(() => {
+        setExpanded(debouncedValue.length > 0)
+    }, [suggestions])
 
     const getSuggestionsContainerStyle = () => {
         if (!isExpanded) return {};
@@ -85,8 +75,8 @@ function SearchBar({ placeholder, prefix, onChange, onSelected }: SearchBarProps
                     className={styles.suggestionsContainer}
                     style={getSuggestionsContainerStyle()}>
                     {
-                        isExpanded && suggestions.length === 0
-                            ? <li onClick={() => handleSuggestionClick(null)}>
+                        debouncedValue.length > 0 && suggestions.length === 0
+                            ? <li onClick={() => handleSuggestionClick()}>
                                 No results found
                             </li>
 

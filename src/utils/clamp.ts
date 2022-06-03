@@ -1,4 +1,4 @@
-export const clamp = (num: number, min?: number, max?: number) => {
+const clamp = (num: number, min?: number, max?: number) => {
     if(min != null && max != null){
         return num <= min
             ? min
@@ -11,3 +11,5 @@ export const clamp = (num: number, min?: number, max?: number) => {
     if(max != null) return num >= max ? max : num;
     return num;
 };
+
+export default clamp

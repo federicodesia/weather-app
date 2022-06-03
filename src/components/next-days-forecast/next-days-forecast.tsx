@@ -3,7 +3,7 @@ import styles from './next-days-forecast.module.css';
 import { IoWater } from 'react-icons/io5';
 import { FaCloudRain } from "react-icons/fa";
 import { useMemo } from 'react';
-import { clamp } from '../../utils/utils';
+import clamp from '../../utils/clamp';
 
 type DayForecast = {
     dayName: string;
