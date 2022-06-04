@@ -1,10 +1,23 @@
 .container {
+    display: flex;
+    flex-direction: column;
+
+    width: 130px;
+    height: 220px;
+
     text-align: center;
+    cursor: pointer;
 }
 
 .card {
-    height: 164px;
-    width: 130px;
+    flex-grow: 1;
+    margin-top: 18px;
+
     background-color: #C4B1E9;
     border-radius: 18px;
+    transition: ease 0.3s;
+}
+
+.selected {
+    margin-top: 0;
 }

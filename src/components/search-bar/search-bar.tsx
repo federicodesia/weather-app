@@ -1,53 +1,56 @@
 import styles from './search-bar.module.css';
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import useDebounce from '../../hooks/use-debounce';
-import useOnClickOutside from '../../hooks/use-on-click-outside';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Suggestion } from '../../interfaces/interfaces';
+import useDebounce from '../../hooks/use-debounce';
 import clamp from '../../utils/clamp';
+import useRoveFocus from '../../hooks/use-rove-focus';
 
 type SearchBarProps = {
     placeholder: string
     prefix?: React.ReactNode
-    suggestions: Suggestion[]
+    suggestions?: Suggestion[]
     onSearch: (value: string) => void
     onSelected: (item: any) => void
 }
 
 function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: SearchBarProps) {
 
-    const [value, setValue] = useState<string>('')
-    const debouncedValue = useDebounce<string>(value, 500)
+    const [value, setValue] = useState('')
+    const debouncedValue = useDebounce(value, 500)
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)
-
-    const [isExpanded, setExpanded] = useState<boolean>(false)
-
-    const containerRef = useRef(null);
-    const handleClickOutside = () => setExpanded(false);
-    const handleClickInside = () => value && !isExpanded && setExpanded(true);
-    useOnClickOutside(containerRef, handleClickOutside)
-
-    const handleSuggestionClick = (item?: any) => {
-        setExpanded(false);
-        if(item){
-            setValue('');
-            onSelected(item);
-        }
-    }
 
     useEffect(() => {
         onSearch(debouncedValue)
     }, [debouncedValue])
 
+    const onSuggestionSelected = (suggestion: Suggestion) => {
+        setValue('');
+        onSelected(suggestion.item);
+    }
+
+    const { currentFocus, setCurrentFocus } = useRoveFocus({
+        length: suggestions?.length ?? 0,
+        onSelected: (index: number) => {
+            const suggestion = suggestions?.at(index)
+            if (suggestion) onSuggestionSelected(suggestion)
+        }
+    });
+
+    const [isFocused, setFocused] = useState(false)
+    const onFocus = () => setFocused(true)
+    const onBlur = () => setFocused(false)
+
     useEffect(() => {
-        setExpanded(debouncedValue.length > 0)
-    }, [suggestions])
+        setCurrentFocus(undefined)
+    }, [isFocused, suggestions])
 
     const getSuggestionsContainerStyle = () => {
-        if (!isExpanded) return {};
-        const lenght = clamp(suggestions.length, 1)
+        if (!isFocused || suggestions === undefined) return {}
+
+        const length = clamp(suggestions.length, 1)
         return {
-            height: `calc(${lenght} * var(--suggestion-height))`,
+            height: `calc(${length} * var(--suggestion-height))`,
             paddingBottom: 16
         }
     }
@@ -55,9 +58,9 @@ function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: S
     return (
         <div
             className={styles.container}
-            ref={containerRef}
-            onClick={handleClickInside}>
-            <div className={`${styles.content} ${isExpanded && styles.expandedContent}`}>
+            onFocus={onFocus}
+            onBlur={onBlur}>
+            <div className={`${styles.content} ${suggestions !== undefined && isFocused && styles.expandedContent}`}>
                 <div className={styles.inputContainer}>
                     {
                         prefix && <div className={styles.prefix}> {prefix} </div>
@@ -75,18 +78,16 @@ function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: S
                     className={styles.suggestionsContainer}
                     style={getSuggestionsContainerStyle()}>
                     {
-                        debouncedValue.length > 0 && suggestions.length === 0
-                            ? <li onClick={() => handleSuggestionClick()}>
-                                No results found
-                            </li>
-
+                        suggestions !== undefined && (suggestions.length === 0
+                            ? <li>No results found</li>
                             : suggestions.map((suggestion, index) => {
                                 return <li
+                                    className={`${currentFocus === index && styles.focused}`}
                                     key={`${suggestion.value} ${index}`}
-                                    onClick={() => handleSuggestionClick(suggestion.item)}>
+                                    onClick={() => onSuggestionSelected(suggestion)}>
                                     {suggestion.value}
                                 </li>
-                            })
+                            }))
                     }
                 </ul>
             </div>

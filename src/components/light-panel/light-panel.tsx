@@ -7,23 +7,18 @@ import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 import { IoSearchOutline } from 'react-icons/io5';
 import { useContext } from 'react';
 import { CityContext } from '../../context/city-context';
-import joinArray from '../../utils/join-array';
-import { CityData } from '../../interfaces/interfaces';
+import display from '../../utils/display';
 
 function LightPanel() {
 
-  const { cityState, searchCity } = useContext(CityContext)
+  const { cityState, searchCity, addCity, selectCity } = useContext(CityContext)
 
-  const suggestions = cityState.searchSuggestions.map(city => {
+  const suggestions = cityState.searchSuggestions?.map(city => {
     return {
       item: city,
-      value: joinArray([city.name, city.state, city.country])
+      value: display([city.name, city.state, city.country])
     }
   })
-
-  const onSearchCitySelected = (city: CityData) => {
-    console.log(`Lat: ${city.lat}, Lon: ${city.lon}`);
-  }
 
   return (
     <div className={styles.container}>
@@ -34,7 +29,7 @@ function LightPanel() {
           prefix={<IoSearchOutline />}
           suggestions={suggestions}
           onSearch={searchCity}
-          onSelected={onSearchCitySelected} />
+          onSelected={addCity} />
 
         <div className={styles.header}>
           <h2>Weather </h2>
@@ -43,9 +38,14 @@ function LightPanel() {
       </div>
 
       <div className='horizontal-scroll start'>
-        <CityCard name='Berlin, Germany'></CityCard>
-        <CityCard name='Paris, France'></CityCard>
-        <CityCard name='New York, USA'></CityCard>
+        {
+          cityState.cities.map(city => <CityCard
+            key={city.id}
+            name={display([city.data.name, city.data.state, city.data.country], 2)}
+            isSelected={cityState.selectedCityId === city.id}
+            onSelected={() => selectCity(city)} />
+          )
+        }
       </div>
 
       <div className='horizontal-scroll column'>

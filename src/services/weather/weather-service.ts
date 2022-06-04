@@ -1,13 +1,15 @@
-import { CityData } from '../../interfaces/interfaces';
+import { CityData, Weather } from '../../interfaces/interfaces';
 import request from '../../utils/request';
 
 const baseUrl = 'https://api.openweathermap.org';
 const apiKey = '25f470fb61e57d9ef1dd1bcaa95c3b55';
 
+type tempUnits = 'standard' | 'metric' | 'imperial';
+
 const getCities = async (
     search: string,
     limit: number = 5,
-) : Promise<CityData[]> => {
+): Promise<CityData[]> => {
 
     return await request(baseUrl, 'geo/1.0/direct', new URLSearchParams({
         q: search,
@@ -16,4 +18,18 @@ const getCities = async (
     }));
 }
 
-export { getCities };
+const getWeather = async (
+    lat: number,
+    lon: number,
+    tempUnits: tempUnits = 'metric'
+): Promise<Weather> => {
+
+    return await request(baseUrl, 'data/2.5/weather', new URLSearchParams({
+        lat: lat.toString(),
+        lon: lon.toString(),
+        units: tempUnits,
+        appid: apiKey
+    }));
+}
+
+export { getCities, getWeather };
