@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './theme/theme.css';
+import './utils/number'
 import App from './App';
 
 const root = ReactDOM.createRoot(

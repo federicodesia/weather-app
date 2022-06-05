@@ -1,9 +1,15 @@
 import styles from './dark-panel.module.css';
 
+import useSelectedCity from '../../hooks/use-selected-city';
+
 import { IoMdCloudy } from "react-icons/io";
 import { FaCloudRain } from "react-icons/fa";
+import display from '../../utils/display';
 
 function DarkPanel() {
+  const selectedCity = useSelectedCity()
+  const { data, weather } = selectedCity ?? {}
+  const { main, sys } = weather ?? {}
 
   return (
     <div className={styles.container}>
@@ -20,23 +26,41 @@ function DarkPanel() {
             <FaCloudRain size={28} id={styles.todayIcon} />
             <div className='column'>
               <h3>Today</h3>
-              <span id={styles.date}>Sat, 3 Aug</span>
+              <span id={styles.date}>
+                {
+                  weather?.dt.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric'
+                  })
+                }
+              </span>
             </div>
           </div>
 
           <div className={styles.tempContainer}>
             <div className='row'>
-              <h1>28</h1>
+              <h1>{main?.temp}</h1>
               <h2>°C</h2>
             </div>
           </div>
 
-          <span id={styles.city}>Berlin, Germany</span>
+          <span id={styles.city}>
+            {display([
+              data?.name,
+              data?.state,
+              data?.country
+            ], 2)}
+          </span>
 
           <div className='row'>
-            <span>Feels like 32</span>
+            <span>
+              {`Feels like ${main?.feelsLike}`}
+            </span>
             <span id={styles.dot}>•</span>
-            <span>Sunset 20:15</span>
+            <span>
+              {`Sunset ${sys?.sunset.getHours()}:${sys?.sunset.getMinutes()}`}
+            </span>
           </div>
         </div>
       </div>

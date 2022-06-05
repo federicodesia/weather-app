@@ -1,3 +1,5 @@
+import { Weather } from "./weather"
+
 export interface CityData {
     lat: number
     lon: number
@@ -21,30 +23,4 @@ export interface CityState {
 export interface Suggestion {
     item: any
     value: string
-}
-
-export interface Weather {
-    id: number
-    main: {
-        temp: number,
-        feels_like: number
-        temp_min: number
-        temp_max: number
-        pressure: number
-        humidity: number
-    }
-    visibility: number,
-    wind: {
-        speed: number
-        deg: number
-    }
-    clouds: {
-        all: number
-    }
-    dt: number
-    sys: {
-        sunrise: number
-        sunset: number
-    }
-    timezone: number
 }

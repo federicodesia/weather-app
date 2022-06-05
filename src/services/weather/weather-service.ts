@@ -1,4 +1,5 @@
-import { CityData, Weather } from '../../interfaces/interfaces';
+import { CityData } from '../../interfaces/interfaces';
+import { WeatherResponse } from '../../interfaces/weather';
 import request from '../../utils/request';
 
 const baseUrl = 'https://api.openweathermap.org';
@@ -22,7 +23,7 @@ const getWeather = async (
     lat: number,
     lon: number,
     tempUnits: tempUnits = 'metric'
-): Promise<Weather> => {
+): Promise<WeatherResponse> => {
 
     return await request(baseUrl, 'data/2.5/weather', new URLSearchParams({
         lat: lat.toString(),

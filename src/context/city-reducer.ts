@@ -16,15 +16,15 @@ export const cityReducer = (
                 ...state,
                 searchSuggestions: action.payload
             }
-        
+
         case 'addCity':
             return {
                 ...state,
                 searchSuggestions: undefined,
                 selectedCityId: action.payload.id,
-                cities: [...state.cities, action.payload]
+                cities: [action.payload, ...state.cities]
             }
-        
+
         case 'selectCity':
             return {
                 ...state,
