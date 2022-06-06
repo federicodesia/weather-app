@@ -8,10 +8,12 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { useContext } from 'react';
 import { CityContext } from '../../context/city-context';
 import display from '../../utils/display';
+import useSelectedCity from '../../hooks/use-selected-city';
 
 function LightPanel() {
 
   const { cityState, searchCity, addCity, selectCity } = useContext(CityContext)
+  const selectedCity = useSelectedCity()
 
   const suggestions = cityState.searchSuggestions?.map(city => {
     return {
@@ -49,38 +51,10 @@ function LightPanel() {
       </div>
 
       <div className='horizontal-scroll column'>
-        <NextDaysForecast days={[
-          {
-            dayName: "Sunday",
-            probabilityRain: 54,
-            minTemp: 17,
-            maxTemp: 28
-          },
-          {
-            dayName: "Tuesday",
-            probabilityRain: 54,
-            minTemp: 19,
-            maxTemp: 25
-          },
-          {
-            dayName: "Wednesday",
-            probabilityRain: 54,
-            minTemp: 14,
-            maxTemp: 21
-          },
-          {
-            dayName: "Thursday",
-            probabilityRain: 54,
-            minTemp: 14,
-            maxTemp: 18
-          },
-          {
-            dayName: "Friday",
-            probabilityRain: 54,
-            minTemp: 22,
-            maxTemp: 28
-          }
-        ]}></NextDaysForecast>
+        <NextDaysForecast
+          selectedCityId={selectedCity?.id}
+          days={selectedCity?.forecast}
+        />
       </div>
     </div>
   );

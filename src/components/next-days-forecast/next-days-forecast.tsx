@@ -4,25 +4,20 @@ import { IoWater } from 'react-icons/io5';
 import { FaCloudRain } from "react-icons/fa";
 import { useMemo } from 'react';
 import clamp from '../../utils/clamp';
-
-type DayForecast = {
-    dayName: string;
-    probabilityRain: number;
-    minTemp: number;
-    maxTemp: number
-};
+import { Forecast } from '../../interfaces/forecast';
 
 type NextDaysForecastProps = {
-    days: Array<DayForecast>;
+    selectedCityId?: number
+    days?: Forecast[]
 }
 
-function NextDaysForecast({ days }: NextDaysForecastProps) {
+function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) {
 
     const separator = 20;
     const longestBar = useMemo(
         () => Math.max(
-            ...days.map(day => clamp(separator - day.minTemp, 0)),
-            ...days.map(day => clamp(day.maxTemp - separator, 0)),
+            ...days.map(day => clamp(separator - day.tempMin, 0)),
+            ...days.map(day => clamp(day.tempMax - separator, 0)),
         ),
         [days]
     )
@@ -32,14 +27,14 @@ function NextDaysForecast({ days }: NextDaysForecastProps) {
     };
 
     const getTempBarStyle = (
-        day: DayForecast,
+        day: Forecast,
         position: "left" | "right"
     ) => {
-        let start = separator - day.minTemp;
-        let end = separator - day.maxTemp;
+        let start = separator - day.tempMin;
+        let end = separator - day.tempMax;
 
-        if(position === "left") end = clamp(end, 0);
-        else if(position === "right") start = clamp(start, undefined, 0);
+        if (position === "left") end = clamp(end, 0);
+        else if (position === "right") start = clamp(start, undefined, 0);
 
         return {
             marginLeft: `${getWidth(longestBar - start)}%`,
@@ -52,17 +47,17 @@ function NextDaysForecast({ days }: NextDaysForecastProps) {
             <tbody>
                 {days.map((day) => (
 
-                    <tr key={day.dayName}>
-                        <th>{day.dayName}</th>
+                    <tr key={`${selectedCityId} ${day.dt.getTime()}`}>
+                        <th>{day.dt.toLocaleDateString('en-US', { weekday: 'long' })}</th>
                         <td>
                             <IoWater id={styles.waterIcon} size={15}></IoWater>
-                            {day.probabilityRain}%
+                            {`${day.pop}%`}
                         </td>
                         <td>
                             <FaCloudRain color='#4394EC' size={22}></FaCloudRain>
                         </td>
 
-                        <td>{day.minTemp}°C</td>
+                        <td>{`${day.tempMin}°C`}</td>
 
                         <td className={styles.tempBar}>
                             <div className={`${styles.verticalDashedLine} absolute-center`}></div>
@@ -72,7 +67,7 @@ function NextDaysForecast({ days }: NextDaysForecastProps) {
                             <div className={styles.right} style={getTempBarStyle(day, "right")}></div>
                         </td>
 
-                        <td id={styles.maxTemp}>{day.maxTemp}°C</td>
+                        <td id={styles.maxTemp}>{`${day.tempMax}°C`}</td>
                     </tr>
                 ))}
             </tbody>

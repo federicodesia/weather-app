@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import { City, CityData, CityState } from '../interfaces/interfaces';
-import { getCities, getWeather } from '../services/weather/weather-service';
+import { getCities, getForecast, getWeather } from '../services/weather/weather-service';
+import forecastFromResponse from '../utils/converters/forecast-converter';
 import weatherFromResponse from '../utils/converters/weather-converter';
 import { CityContext } from './city-context';
 import { cityReducer } from './city-reducer';
@@ -39,11 +40,13 @@ export const CityProvider = ({ children }: CityProviderProps) => {
         }
         else{
             const weatherResponse = await getWeather(data.lat, data.lon);
+            const forecastResponse = await getForecast(data.lat, data.lon);
             dispatch({
                 type: 'addCity', payload: {
                     id: weatherResponse.id,
                     data: data,
-                    weather: weatherFromResponse(weatherResponse)
+                    weather: weatherFromResponse(weatherResponse),
+                    forecast: forecastFromResponse(forecastResponse)
                 }
             })
         }

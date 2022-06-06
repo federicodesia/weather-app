@@ -1,3 +1,4 @@
+import { ForecastResponse } from '../../interfaces/forecast';
 import { CityData } from '../../interfaces/interfaces';
 import { WeatherResponse } from '../../interfaces/weather';
 import request from '../../utils/request';
@@ -33,4 +34,18 @@ const getWeather = async (
     }));
 }
 
-export { getCities, getWeather };
+const getForecast = async (
+    lat: number,
+    lon: number,
+    tempUnits: tempUnits = 'metric'
+): Promise<ForecastResponse> => {
+
+    return await request(baseUrl, 'data/2.5/forecast', new URLSearchParams({
+        lat: lat.toString(),
+        lon: lon.toString(),
+        units: tempUnits,
+        appid: apiKey
+    }));
+}
+
+export { getCities, getWeather, getForecast };
