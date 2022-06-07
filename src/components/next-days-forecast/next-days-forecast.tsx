@@ -1,10 +1,10 @@
 import styles from './next-days-forecast.module.css';
 
 import { IoWater } from 'react-icons/io5';
-import { FaCloudRain } from "react-icons/fa";
 import { useMemo } from 'react';
 import clamp from '../../utils/clamp';
 import { Forecast } from '../../interfaces/forecast';
+import WeatherIcon from '../weather-icon/weather-icon';
 
 type NextDaysForecastProps = {
     selectedCityId?: number
@@ -49,15 +49,18 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
 
                     <tr key={`${selectedCityId} ${day.dt.getTime()}`}>
                         <th>{day.dt.toLocaleDateString('en-US', { weekday: 'long' })}</th>
-                        <td>
-                            <IoWater id={styles.waterIcon} size={15}></IoWater>
+
+                        <td id={styles.pop}>
+                            <IoWater id={styles.waterIcon} size={15} />
                             {`${day.pop}%`}
                         </td>
-                        <td>
-                            <FaCloudRain color='#4394EC' size={22}></FaCloudRain>
+                        <td id={styles.weatherIcon}>
+                            <WeatherIcon icon={day.icon} pod={'d'} />
                         </td>
 
-                        <td>{`${day.tempMin}°C`}</td>
+                        <td id={styles.minTemp}>
+                            {`${day.tempMin}°C`}
+                        </td>
 
                         <td className={styles.tempBar}>
                             <div className={`${styles.verticalDashedLine} absolute-center`}></div>

@@ -1,10 +1,11 @@
 import { Weather, WeatherResponse } from "../../interfaces/weather"
 
 export default function weatherFromResponse(response: WeatherResponse): Weather {
-    const { main, sys, timezone } = response
+    const { weather, main, sys, timezone } = response
 
     return {
         ...response,
+        icon: weather[0].icon,
         main: {
             ...main,
             temp: main.temp.round(),

@@ -3,13 +3,13 @@ import styles from './dark-panel.module.css';
 import useSelectedCity from '../../hooks/use-selected-city';
 
 import { IoMdCloudy } from "react-icons/io";
-import { FaCloudRain } from "react-icons/fa";
 import display from '../../utils/display';
+import WeatherIcon from '../weather-icon/weather-icon';
 
 function DarkPanel() {
   const selectedCity = useSelectedCity()
   const { data, weather } = selectedCity ?? {}
-  const { main, sys } = weather ?? {}
+  const { icon, main, sys } = weather ?? {}
 
   return (
     <div className={styles.container}>
@@ -23,7 +23,10 @@ function DarkPanel() {
         <div className='column center-items expand'>
 
           <div className='row center-items'>
-            <FaCloudRain size={28} id={styles.todayIcon} />
+            <div id={styles.todayIcon}>
+              <WeatherIcon icon={icon} size={28}/>
+            </div>
+
             <div className='column'>
               <h3>Today</h3>
               <span id={styles.date}>

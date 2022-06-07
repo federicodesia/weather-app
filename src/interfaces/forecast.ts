@@ -5,6 +5,11 @@ export interface ForecastResponse {
             temp_min: number
             temp_max: number
         }
+        weather: [
+            {
+                icon: string
+            }
+        ]
         pop: number
     }[],
     city: {
@@ -13,6 +18,8 @@ export interface ForecastResponse {
 }
 
 export interface Forecast {
+    icon: string
+    cnt: number
     dt: Date
     tempMin: number
     tempMax: number

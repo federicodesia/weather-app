@@ -1,5 +1,10 @@
 export interface WeatherResponse {
     id: number
+    weather: [
+        {
+            icon: string
+        }
+    ]
     main: {
         temp: number,
         feels_like: number
@@ -15,6 +20,7 @@ export interface WeatherResponse {
 }
 
 export interface Weather {
+    icon: string
     main: {
         temp: number,
         feelsLike: number

@@ -1,0 +1,16 @@
+.weatherIcon {
+    color: #4394EC;
+}
+
+.weatherIcon * {
+    height: 100%;
+    width: 100%;
+}
+
+#sun {
+    color: #F8C500;
+}
+
+#thunderstorm {
+    color: #202B5C
+}
