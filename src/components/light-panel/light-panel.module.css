@@ -1,15 +1,21 @@
 .container {
-    padding: 48px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    padding-top: 48px;
+    padding-bottom: 18px;
+    
     overflow: hidden;
     width: 680px;
 }
 
 .contentPadding {
-    padding: 0px 40px;
-}
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 
-.header {
-    margin: 24px 0px;
+    padding: 0px 40px;
 }
 
 .header * {

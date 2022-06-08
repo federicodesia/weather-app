@@ -69,34 +69,7 @@ function DarkPanel() {
             </div>
           </div>
 
-          <ProbabilityRain items={
-            [
-              {
-                date: new Date(),
-                pop: 100
-              },
-              {
-                date: new Date(),
-                pop: 75
-              },
-              {
-                date: new Date(),
-                pop: 85
-              },
-              {
-                date: new Date(),
-                pop: 100
-              },
-              {
-                date: new Date(),
-                pop: 75
-              },
-              {
-                date: new Date(),
-                pop: 85
-              }
-            ]
-          } />
+          <ProbabilityRain items={selectedCity?.rainForecast} />
         </div>
       </div>
     </div>

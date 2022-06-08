@@ -1,13 +1,16 @@
+import { RainForecast } from '../../interfaces/forecast';
 import styles from './probability-rain.module.css';
 
 type ProbabilityRainProps = {
-    items: {
-        date: Date
-        pop: number
-    }[]
+    items?: RainForecast[]
 }
 
-function ProbabilityRain({ items }: ProbabilityRainProps) {
+function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
+
+    const getBarStyle = (item: RainForecast) => {
+        return { height: `${item.pop * 100}%` }
+    }
+
     return (
         <div className={`column ${styles.container}`}>
             <h4>Chance of rain</h4>
@@ -24,15 +27,15 @@ function ProbabilityRain({ items }: ProbabilityRainProps) {
                         items.map((item, index) => {
                             return <div
                                 className='column'
-                                key={`${item.date} ${index}`}>
+                                key={`${item.dt} ${index}`}>
 
                                 <div className={styles.barContainer}>
                                     <div className='vertical-dashed-line light absolute-center'></div>
-                                    <div className={styles.bar}></div>
+                                    <div className={styles.bar} style={getBarStyle(item)} />
                                 </div>
 
                                 <span>
-                                    {item.date.toLocaleTimeString('en-US', { hour: 'numeric' }).replace(' ', '')}
+                                    {item.dt.toLocaleTimeString('en-US', { hour: 'numeric' }).replace(' ', '')}
                                 </span>
                             </div>
                         })

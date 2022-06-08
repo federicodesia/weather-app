@@ -1,4 +1,4 @@
-import { Forecast } from "./forecast"
+import { Forecast, RainForecast } from "./forecast"
 import { Weather } from "./weather"
 
 export interface CityData {
@@ -14,6 +14,7 @@ export interface City {
     data: CityData
     weather: Weather
     forecast: Forecast[]
+    rainForecast: RainForecast[]
 }
 
 export interface CityState {

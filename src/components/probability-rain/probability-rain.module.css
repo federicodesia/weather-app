@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    --column-height: 125px;
 }
 
 .chartContainer {
@@ -7,7 +8,7 @@
 }
 
 .weatherColumn {
-    height: 150px;
+    height: var(--column-height);
     margin-right: 8px;
 }
 
@@ -24,7 +25,7 @@
 
 .barContainer {
     position: relative;
-    height: 150px;
+    height: var(--column-height);
     margin-bottom: 20px;
 }
 
@@ -32,7 +33,6 @@
     background-color: #302E62;
     width: 10px;
     border-radius: 8px;
-    height: 54%;
 
     position: absolute;
     bottom: 0;

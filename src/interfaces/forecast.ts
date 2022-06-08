@@ -25,3 +25,8 @@ export interface Forecast {
     tempMax: number
     pop: number
 }
+
+export interface RainForecast {
+    dt: Date,
+    pop: number
+}

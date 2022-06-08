@@ -3,10 +3,15 @@
     flex-direction: column;
 
     width: 130px;
-    height: 220px;
+    height: 200px;
 
     text-align: center;
+}
+
+.container h5{
     cursor: pointer;
+    margin: 0px;
+    padding-top: 18px;
 }
 
 .card {
@@ -16,6 +21,7 @@
     background-color: #C4B1E9;
     border-radius: 18px;
     transition: ease 0.3s;
+    cursor: pointer;
 }
 
 .selected {

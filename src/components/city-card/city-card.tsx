@@ -9,9 +9,12 @@ type CityCardProps = {
 function CityCard({ name, isSelected, onSelected }: CityCardProps) {
 
     return (
-        <div className={styles.container} onClick={onSelected}>
-            <div className={`${styles.card} ${isSelected && styles.selected}`}></div>
-            <h5>{name}</h5>
+        <div className={styles.container}>
+            <div
+                className={`${styles.card} ${isSelected && styles.selected}`}
+                onClick={onSelected}/>
+            
+            <h5 onClick={onSelected}>{name}</h5>
         </div>
 
     );

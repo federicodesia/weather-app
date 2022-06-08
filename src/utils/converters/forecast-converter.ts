@@ -1,10 +1,10 @@
-import { Forecast, ForecastResponse } from "../../interfaces/forecast"
+import { Forecast, ForecastResponse, RainForecast } from "../../interfaces/forecast"
 import average from "../average";
 import groupBy from "../group-by";
 import getMostFrequent from "../most-frecuent";
 
-export default function forecastFromResponse(response: ForecastResponse): Forecast[] {
-    const forecasts: Forecast[] = response.list.map(item => {
+function forecastFromResponse(response: ForecastResponse): Forecast[] {
+    return response.list.map(item => {
         const { main, weather } = item
 
         return {
@@ -16,9 +16,17 @@ export default function forecastFromResponse(response: ForecastResponse): Foreca
             tempMax: main.temp_max
         }
     })
+}
 
+function rainForecast(forecasts: Forecast[]) : RainForecast[] {
+    return forecasts.slice(0, 6).map(item => {
+        return { ...item }
+    })
+}
+
+function daysForecast(forecasts: Forecast[]) {
     const groupedForecasts = groupBy(forecasts, item => item.dt.toDateString());
-    
+
     let daysForecast = Array.from(
         groupedForecasts, ([key, value]) => {
             return {
@@ -32,12 +40,12 @@ export default function forecastFromResponse(response: ForecastResponse): Foreca
         }
     );
 
-    if(daysForecast.length > 5){
+    if (daysForecast.length > 5) {
         daysForecast.first().cnt >= daysForecast.last().cnt
             ? daysForecast.pop()
             : daysForecast.shift()
     }
-    console.log(daysForecast)
-
     return daysForecast
 }
+
+export { forecastFromResponse, daysForecast, rainForecast }
