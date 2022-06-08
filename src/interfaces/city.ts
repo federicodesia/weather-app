@@ -21,8 +21,3 @@ export interface CityState {
     cities: City[]
     selectedCityId?: number
 }
-
-export interface Suggestion {
-    item: any
-    value: string
-}

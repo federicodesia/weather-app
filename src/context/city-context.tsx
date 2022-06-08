@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { City, CityData, CityState } from "../interfaces/interfaces";
+import { City, CityData, CityState } from "../interfaces/city";
 
 export type CityContextProps = {
     cityState: CityState;

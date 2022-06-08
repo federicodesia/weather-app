@@ -2,7 +2,7 @@ import styles from './weather-icon.module.css';
 
 import { useMemo } from 'react';
 import { IoCloudyNight, IoPartlySunny, IoThunderstorm } from 'react-icons/io5';
-import { BsCloudHaze2Fill, BsCloudsFill, BsFillCloudDrizzleFill, BsMoonFill, BsSunFill } from "react-icons/bs";
+import { BsCloudHaze2Fill, BsCloudsFill, BsFillCloudDrizzleFill, BsSunFill } from "react-icons/bs";
 import { FaCloudRain } from 'react-icons/fa';
 import { IoMdMoon, IoMdSnow } from 'react-icons/io';
 

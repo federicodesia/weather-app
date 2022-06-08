@@ -5,6 +5,7 @@ import useSelectedCity from '../../hooks/use-selected-city';
 import { IoMdCloudy } from "react-icons/io";
 import display from '../../utils/display';
 import WeatherIcon from '../weather-icon/weather-icon';
+import ProbabilityRain from '../probability-rain/probability-rain';
 
 function DarkPanel() {
   const selectedCity = useSelectedCity()
@@ -19,52 +20,83 @@ function DarkPanel() {
         <IoMdCloudy size={100} id={styles.cloud3} />
       </div>
 
-      <div className={styles.content}>
-        <div className='column center-items expand'>
+      <div className={styles.absoluteContent}>
+        <div className={styles.content}>
+          <div className={styles.currentWeather}>
 
-          <div className='row center-items'>
-            <div id={styles.todayIcon}>
-              <WeatherIcon icon={icon} size={28}/>
+            <div className='row center-items'>
+              <div id={styles.todayIcon}>
+                <WeatherIcon icon={icon} size={28} />
+              </div>
+
+              <div className='column'>
+                <h3>Today</h3>
+                <span id={styles.date}>
+                  {
+                    weather?.dt.toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      month: 'short',
+                      day: 'numeric'
+                    })
+                  }
+                </span>
+              </div>
             </div>
 
-            <div className='column'>
-              <h3>Today</h3>
-              <span id={styles.date}>
-                {
-                  weather?.dt.toLocaleDateString('en-US', {
-                    weekday: 'short',
-                    month: 'short',
-                    day: 'numeric'
-                  })
-                }
+            <div className={styles.tempContainer}>
+              <div className='row'>
+                <h1>{main?.temp}</h1>
+                <h2>°C</h2>
+              </div>
+            </div>
+
+            <span>
+              {display([
+                data?.name,
+                data?.state,
+                data?.country
+              ], 2)}
+            </span>
+
+            <div className='row center-items'>
+              <span>
+                {`Feels like ${main?.feelsLike}`}
+              </span>
+              <span id={styles.dot}>•</span>
+              <span>
+                {`Sunset ${sys?.sunset.getHours()}:${sys?.sunset.getMinutes()}`}
               </span>
             </div>
           </div>
 
-          <div className={styles.tempContainer}>
-            <div className='row'>
-              <h1>{main?.temp}</h1>
-              <h2>°C</h2>
-            </div>
-          </div>
-
-          <span id={styles.city}>
-            {display([
-              data?.name,
-              data?.state,
-              data?.country
-            ], 2)}
-          </span>
-
-          <div className='row'>
-            <span>
-              {`Feels like ${main?.feelsLike}`}
-            </span>
-            <span id={styles.dot}>•</span>
-            <span>
-              {`Sunset ${sys?.sunset.getHours()}:${sys?.sunset.getMinutes()}`}
-            </span>
-          </div>
+          <ProbabilityRain items={
+            [
+              {
+                date: new Date(),
+                pop: 100
+              },
+              {
+                date: new Date(),
+                pop: 75
+              },
+              {
+                date: new Date(),
+                pop: 85
+              },
+              {
+                date: new Date(),
+                pop: 100
+              },
+              {
+                date: new Date(),
+                pop: 75
+              },
+              {
+                date: new Date(),
+                pop: 85
+              }
+            ]
+          } />
         </div>
       </div>
     </div>

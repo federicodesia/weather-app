@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { City, CityData, CityState } from '../interfaces/interfaces';
+import { City, CityData, CityState } from '../interfaces/city';
 import { getCities, getForecast, getWeather } from '../services/weather/weather-service';
 import forecastFromResponse from '../utils/converters/forecast-converter';
 import weatherFromResponse from '../utils/converters/weather-converter';

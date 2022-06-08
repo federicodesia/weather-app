@@ -63,8 +63,8 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
                         </td>
 
                         <td className={styles.tempBar}>
-                            <div className={`${styles.verticalDashedLine} absolute-center`}></div>
-                            <div className={`${styles.horizontalDashedLine} absolute-center`}></div>
+                            <div className='vertical-dashed-line absolute-center'></div>
+                            <div className='horizontal-dashed-line absolute-center'></div>
 
                             <div className={styles.left} style={getTempBarStyle(day, "left")}></div>
                             <div className={styles.right} style={getTempBarStyle(day, "right")}></div>

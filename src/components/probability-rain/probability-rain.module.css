@@ -1,0 +1,41 @@
+.container {
+    width: 100%;
+}
+
+.chartContainer {
+    margin-top: 32px;
+}
+
+.weatherColumn {
+    height: 150px;
+    margin-right: 8px;
+}
+
+.weatherColumn * {
+    text-overflow: clip;
+    white-space: normal;
+}
+
+.barsContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.barContainer {
+    position: relative;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.bar {
+    background-color: #302E62;
+    width: 10px;
+    border-radius: 8px;
+    height: 54%;
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

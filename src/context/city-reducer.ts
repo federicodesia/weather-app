@@ -1,4 +1,4 @@
-import { City, CityData, CityState } from "../interfaces/interfaces";
+import { City, CityData, CityState } from "../interfaces/city";
 
 type CityAction =
     | { type: 'setSuggestions', payload: CityData[] | undefined }

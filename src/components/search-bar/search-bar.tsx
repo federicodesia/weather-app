@@ -1,7 +1,7 @@
 import styles from './search-bar.module.css';
 
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Suggestion } from '../../interfaces/interfaces';
+import { Suggestion } from '../../interfaces/suggestion';
 import useDebounce from '../../hooks/use-debounce';
 import clamp from '../../utils/clamp';
 import useRoveFocus from '../../hooks/use-rove-focus';

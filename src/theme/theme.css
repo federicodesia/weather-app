@@ -15,6 +15,7 @@ h1,
 h2,
 h3,
 h4,
+h5,
 span,
 li {
   overflow: hidden;
@@ -23,7 +24,7 @@ li {
 }
 
 h1 {
-  font-size: 130px;
+  font-size: 104px;
   font-weight: 300;
 }
 
@@ -43,6 +44,11 @@ h3 {
 }
 
 h4 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+h5 {
   font-size: 14px;
   font-weight: 500;
 }
@@ -64,18 +70,22 @@ h4 {
   flex-direction: row;
 }
 
-.center-items {
-  justify-content: center;
-  align-items: center;
-}
-
 .column {
   display: flex;
   flex-direction: column;
 }
 
-.column.expand{
+.center-items {
+  justify-content: center;
+  align-items: center;
+}
+
+.column.expand {
   height: 100%;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .horizontal-scroll {
@@ -88,11 +98,11 @@ h4 {
   justify-content: stretch;
 }
 
-.horizontal-scroll.start{
+.horizontal-scroll.start {
   justify-content: start;
 }
 
-.absolute-center{
+.absolute-center {
   position: absolute;
   top: 50%;
   left: 50%;

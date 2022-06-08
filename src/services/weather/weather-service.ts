@@ -1,5 +1,5 @@
 import { ForecastResponse } from '../../interfaces/forecast';
-import { CityData } from '../../interfaces/interfaces';
+import { CityData } from '../../interfaces/city';
 import { WeatherResponse } from '../../interfaces/weather';
 import request from '../../utils/request';
 
