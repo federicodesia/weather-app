@@ -15,9 +15,11 @@ export interface City {
     weather: Weather
     forecast: Forecast[]
     rainForecast: RainForecast[]
+    updatedAt: Date
 }
 
 export interface CityState {
+    isLoading: boolean
     searchSuggestions?: CityData[]
     cities: City[]
     selectedCityId?: number

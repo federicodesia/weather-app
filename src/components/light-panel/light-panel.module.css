@@ -1,13 +1,21 @@
 .container {
+    display: grid;
+    width: 680px;
+    overflow: hidden;
+}
+
+.loadingBar,
+.contentContainer {
+    grid-area: 1 / 1;
+}
+
+.contentContainer {
     display: flex;
     flex-direction: column;
     gap: 24px;
 
     padding-top: 48px;
     padding-bottom: 18px;
-    
-    overflow: hidden;
-    width: 680px;
 }
 
 .contentPadding {
@@ -20,4 +28,42 @@
 
 .header * {
     display: inline;
+}
+
+.loadingBar {
+    height: 5px;
+    width: 100%;
+    background-color: #A1C2FA;
+    
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 24px;
+}
+
+.loadingBar::after {
+    content: '';
+
+    height: 5px;
+    width: 50%;
+    background-color: #3B78E7;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    animation: loadingBarAnimation 2s ease infinite;
+}
+
+@keyframes loadingBarAnimation {
+    0% {
+        left: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        left: 100%;
+        transform: translateX(0%);
+    }
 }

@@ -24,37 +24,43 @@ function LightPanel() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contentPadding}>
+      {
+        cityState.isLoading && <div className={styles.loadingBar}/>
+      }
 
-        <SearchBar
-          placeholder='Search new place'
-          prefix={<IoSearchOutline />}
-          suggestions={suggestions}
-          onSearch={searchCity}
-          onSelected={addCity} />
-
-        <div className={styles.header}>
-          <h2>Weather </h2>
-          <h2 className='bold-h2'>Forecast</h2>
+      <div className={styles.contentContainer}>
+        <div className={styles.contentPadding}>
+      
+          <SearchBar
+            placeholder='Search new place'
+            prefix={<IoSearchOutline />}
+            suggestions={suggestions}
+            onSearch={searchCity}
+            onSelected={addCity} />
+      
+          <div className={styles.header}>
+            <h2>Weather </h2>
+            <h2 className='bold-h2'>Forecast</h2>
+          </div>
         </div>
-      </div>
-
-      <div className='horizontal-scroll start'>
-        {
-          cityState.cities.map(city => <CityCard
-            key={city.id}
-            name={display([city.data.name, city.data.state, city.data.country], 2)}
-            isSelected={cityState.selectedCityId === city.id}
-            onSelected={() => selectCity(city)} />
-          )
-        }
-      </div>
-
-      <div className='horizontal-scroll column'>
-        <NextDaysForecast
-          selectedCityId={selectedCity?.id}
-          days={selectedCity?.forecast}
-        />
+      
+        <div className='horizontal-scroll start'>
+          {
+            cityState.cities.map(city => <CityCard
+              key={city.id}
+              name={display([city.data.name, city.data.state, city.data.country], 2)}
+              isSelected={cityState.selectedCityId === city.id}
+              onSelected={() => selectCity(city)} />
+            )
+          }
+        </div>
+      
+        <div className='horizontal-scroll column'>
+          <NextDaysForecast
+            selectedCityId={selectedCity?.id}
+            days={selectedCity?.forecast}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { City, CityData, CityState } from "../interfaces/city";
 
 type CityAction =
+    | { type: 'setLoading', payload: boolean }
     | { type: 'setSuggestions', payload: CityData[] | undefined }
     | { type: 'addCity', payload: City }
     | { type: 'selectCity', payload: City }
+    | { type: 'updateCity', payload: City }
 
 export const cityReducer = (
     state: CityState,
@@ -11,6 +13,12 @@ export const cityReducer = (
 ): CityState => {
 
     switch (action.type) {
+        case 'setLoading':
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+
         case 'setSuggestions':
             return {
                 ...state,
@@ -29,6 +37,16 @@ export const cityReducer = (
             return {
                 ...state,
                 selectedCityId: action.payload.id
+            }
+        
+        case 'updateCity':
+            return {
+                ...state,
+                cities: state.cities.map(city => {
+                    return city.id === action.payload.id
+                        ? action.payload
+                        : city
+                })
             }
 
         default:
