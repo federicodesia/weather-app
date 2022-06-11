@@ -12,6 +12,8 @@ function DarkPanel() {
   const { data, weather } = selectedCity ?? {}
   const { icon, main, sys } = weather ?? {}
 
+  const sunset = sys ? new Date(sys.sunset) : undefined
+
   return (
     <div className={styles.container}>
       <div className={styles.clouds}>
@@ -33,7 +35,7 @@ function DarkPanel() {
                 <h3>Today</h3>
                 <span id={styles.date}>
                   {
-                    weather?.dt.toLocaleDateString('en-US', {
+                    weather && new Date(weather.dt).toLocaleDateString('en-US', {
                       weekday: 'short',
                       month: 'short',
                       day: 'numeric'
@@ -64,7 +66,7 @@ function DarkPanel() {
               </span>
               <span id={styles.dot}>•</span>
               <span>
-                {`Sunset ${sys?.sunset.getHours()}:${sys?.sunset.getMinutes()}`}
+                {`Sunset ${sunset?.getHours()}:${sunset?.getMinutes()}`}
               </span>
             </div>
           </div>

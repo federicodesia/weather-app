@@ -4,19 +4,17 @@ export default function weatherFromResponse(response: WeatherResponse): Weather 
     const { weather, main, sys, timezone } = response
 
     return {
-        ...response,
         icon: weather[0].icon,
         main: {
-            ...main,
             temp: main.temp.round(),
             feelsLike: main.feels_like.round(),
             tempMin: main.temp_min.round(),
             tempMax: main.temp_max.round()
         },
-        dt: response.dt.toDate(timezone),
+        dt: response.dt.dateWithTimezone(timezone),
         sys: {
-            sunrise: sys.sunrise.toDate(timezone),
-            sunset: sys.sunset.toDate(timezone),
+            sunrise: sys.sunrise.dateWithTimezone(timezone),
+            sunset: sys.sunset.dateWithTimezone(timezone),
         }
     }
 }

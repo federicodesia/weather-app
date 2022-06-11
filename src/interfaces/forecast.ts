@@ -20,13 +20,13 @@ export interface ForecastResponse {
 export interface Forecast {
     icon: string
     cnt: number
-    dt: Date
+    dt: number
     tempMin: number
     tempMax: number
     pop: number
 }
 
 export interface RainForecast {
-    dt: Date,
+    dt: number,
     pop: number
 }

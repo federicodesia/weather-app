@@ -27,9 +27,9 @@ export interface Weather {
         tempMin: number
         tempMax: number
     }
-    dt: Date
+    dt: number
     sys: {
-        sunrise: Date
-        sunset: Date
+        sunrise: number
+        sunset: number
     }
 }

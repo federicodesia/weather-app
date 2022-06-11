@@ -35,7 +35,7 @@ function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
                                 </div>
 
                                 <span>
-                                    {item.dt.toLocaleTimeString('en-US', { hour: 'numeric' }).replace(' ', '')}
+                                    {new Date(item.dt).toLocaleTimeString('en-US', { hour: 'numeric' }).replace(' ', '')}
                                 </span>
                             </div>
                         })

@@ -15,7 +15,7 @@ export interface City {
     weather: Weather
     forecast: Forecast[]
     rainForecast: RainForecast[]
-    updatedAt: Date
+    updatedAt: number
 }
 
 export interface CityState {

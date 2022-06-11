@@ -1,7 +1,6 @@
 .container {
     display: grid;
     width: 680px;
-    overflow: hidden;
 }
 
 .loadingBar,
@@ -16,6 +15,7 @@
 
     padding-top: 48px;
     padding-bottom: 18px;
+    overflow: hidden;
 }
 
 .contentPadding {

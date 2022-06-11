@@ -1,15 +1,17 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { City, CityData, CityState } from '../interfaces/city';
 import { getCities, getForecast, getWeather } from '../services/weather/weather-service';
 import { daysForecast, forecastFromResponse, rainForecast } from '../utils/converters/forecast-converter';
 import weatherFromResponse from '../utils/converters/weather-converter';
+import { readLocalStorage, writeLocalStorage } from '../utils/local-storage';
 import { CityContext } from './city-context';
 import { cityReducer } from './city-reducer';
 
 export const initialState: CityState = {
     isLoading: false,
     searchSuggestions: undefined,
-    cities: []
+    cities: readLocalStorage('cities', []),
+    selectedCityId: readLocalStorage('selectedCityId', undefined)
 }
 
 interface CityProviderProps {
@@ -19,6 +21,14 @@ interface CityProviderProps {
 export const CityProvider = ({ children }: CityProviderProps) => {
 
     const [cityState, dispatch] = useReducer(cityReducer, initialState);
+
+    useEffect(() => {
+        writeLocalStorage('cities', cityState.cities)
+    }, [cityState.cities])
+
+    useEffect(() => {
+        writeLocalStorage('selectedCityId', cityState.selectedCityId)
+    }, [cityState.selectedCityId])
 
     const searchCity = async (value: string) => {
         dispatch({
@@ -51,7 +61,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     const selectCity = async (city: City) => {
         dispatch({ type: 'selectCity', payload: city })
 
-        if (new Date().getTime() - city.updatedAt.getTime() > 5 * 60 * 1000) {
+        if (new Date().getTime() - city.updatedAt > 5 * 60 * 1000) {
             dispatch({
                 type: 'updateCity',
                 payload: await fetchCity(city.data)
@@ -60,7 +70,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     }
 
     const setLoading = (value: boolean) => {
-        dispatch({type: 'setLoading', payload: value})
+        dispatch({ type: 'setLoading', payload: value })
     }
 
     const fetchCity = async (data: CityData): Promise<City> => {
@@ -73,7 +83,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
         return {
             id: weatherResponse.id,
             data: data,
-            updatedAt: new Date(),
+            updatedAt: new Date().getTime(),
             weather: weatherFromResponse(weatherResponse),
             forecast: daysForecast(forecast),
             rainForecast: rainForecast(forecast)

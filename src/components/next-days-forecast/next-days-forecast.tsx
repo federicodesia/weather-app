@@ -45,10 +45,11 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
     return (
         <table className={styles.table}>
             <tbody>
-                {days.map((day) => (
-
-                    <tr key={`${selectedCityId} ${day.dt.getTime()}`}>
-                        <th>{day.dt.toLocaleDateString('en-US', { weekday: 'long' })}</th>
+                {days.map((day) => {
+                    return <tr key={`${selectedCityId} ${day.dt}`}>
+                        <th>
+                            {new Date(day.dt).toLocaleDateString('en-US', { weekday: 'long' })}
+                        </th>
 
                         <td id={styles.pop}>
                             <IoWater id={styles.waterIcon} size={15} />
@@ -72,7 +73,7 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
 
                         <td id={styles.maxTemp}>{`${day.tempMax}°C`}</td>
                     </tr>
-                ))}
+                })}
             </tbody>
         </table>
     );
