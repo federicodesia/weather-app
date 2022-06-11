@@ -25,25 +25,25 @@ function LightPanel() {
   return (
     <div className={styles.container}>
       {
-        cityState.isLoading && <div className={styles.loadingBar}/>
+        cityState.ongoingRequests > 0 && <div className={styles.loadingBar} />
       }
 
       <div className={styles.contentContainer}>
         <div className={styles.contentPadding}>
-      
+
           <SearchBar
             placeholder='Search new place'
             prefix={<IoSearchOutline />}
             suggestions={suggestions}
             onSearch={searchCity}
             onSelected={addCity} />
-      
+
           <div className={styles.header}>
             <h2>Weather </h2>
             <h2 className='bold-h2'>Forecast</h2>
           </div>
         </div>
-      
+
         <div className='horizontal-scroll start'>
           {
             cityState.cities.map(city => <CityCard
@@ -54,7 +54,7 @@ function LightPanel() {
             )
           }
         </div>
-      
+
         <div className='horizontal-scroll column'>
           <NextDaysForecast
             selectedCityId={selectedCity?.id}

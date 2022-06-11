@@ -8,7 +8,7 @@ import { CityContext } from './city-context';
 import { cityReducer } from './city-reducer';
 
 export const initialState: CityState = {
-    isLoading: false,
+    ongoingRequests: 0,
     searchSuggestions: undefined,
     cities: readLocalStorage('cities', []),
     selectedCityId: readLocalStorage('selectedCityId', undefined)
@@ -55,6 +55,13 @@ export const CityProvider = ({ children }: CityProviderProps) => {
                 type: 'addCity',
                 payload: await fetchCity(data)
             })
+
+            if (cityState.cities.length > 5) {
+                dispatch({
+                    type: 'deleteCity',
+                    payload: cityState.cities.last()
+                })
+            }
         }
     }
 
@@ -70,7 +77,12 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     }
 
     const setLoading = (value: boolean) => {
-        dispatch({ type: 'setLoading', payload: value })
+        dispatch({
+            type: 'setOngoingRequests',
+            payload: value
+                ? cityState.ongoingRequests + 1
+                : cityState.ongoingRequests - 1
+        })
     }
 
     const fetchCity = async (data: CityData): Promise<City> => {
