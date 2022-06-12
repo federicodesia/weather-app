@@ -1,4 +1,4 @@
-import { City, CityData, CityState } from "../interfaces/city";
+import { City, CityData, CityState } from "../../interfaces/city";
 
 type CityAction =
     | { type: 'setOngoingRequests', payload: number }

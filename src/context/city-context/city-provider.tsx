@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from 'react';
-import { City, CityData, CityState } from '../interfaces/city';
-import { getCities, getForecast, getWeather } from '../services/weather/weather-service';
-import { daysForecast, forecastFromResponse, rainForecast } from '../utils/converters/forecast-converter';
-import weatherFromResponse from '../utils/converters/weather-converter';
-import { readLocalStorage, writeLocalStorage } from '../utils/local-storage';
+import { City, CityData, CityState } from '../../interfaces/city';
+import { getCities, getForecast, getWeather } from '../../services/weather/weather-service';
+import { daysForecast, forecastFromResponse, rainForecast } from '../../utils/converters/forecast-converter';
+import weatherFromResponse from '../../utils/converters/weather-converter';
+import { readLocalStorage, writeLocalStorage } from '../../utils/local-storage';
 import { CityContext } from './city-context';
 import { cityReducer } from './city-reducer';
 
@@ -57,10 +57,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
             })
 
             if (cityState.cities.length > 5) {
-                dispatch({
-                    type: 'deleteCity',
-                    payload: cityState.cities.last()
-                })
+                deleteCity(cityState.cities.last())
             }
         }
     }
@@ -75,6 +72,10 @@ export const CityProvider = ({ children }: CityProviderProps) => {
             })
         }
     }
+
+    const deleteCity = (city: City) => {
+        dispatch({ type: 'deleteCity', payload: city })
+    } 
 
     const setLoading = (value: boolean) => {
         dispatch({
@@ -107,7 +108,8 @@ export const CityProvider = ({ children }: CityProviderProps) => {
             cityState,
             searchCity,
             addCity,
-            selectCity
+            selectCity,
+            deleteCity
         }}>
             {children}
         </CityContext.Provider>

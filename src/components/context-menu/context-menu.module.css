@@ -1,0 +1,38 @@
+.container {
+    --icon-size: 20px;
+
+    position: absolute;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 16px;
+    z-index: 1;
+}
+
+ul {
+    margin: 0;
+    padding: 12px 0px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.icon {
+    color: #737373;
+    margin-right: 16px;
+    height: var(--icon-size);
+    width: var(--icon-size);
+}
+
+.icon * {
+    height: var(--icon-size);
+    width: var(--icon-size);
+}
+
+li:hover {
+    background-color: #EEEEEE;
+}

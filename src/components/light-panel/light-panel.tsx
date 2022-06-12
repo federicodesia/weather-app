@@ -6,7 +6,7 @@ import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 import { IoSearchOutline } from 'react-icons/io5';
 import { useContext } from 'react';
-import { CityContext } from '../../context/city-context';
+import { CityContext } from '../../context/city-context/city-context';
 import display from '../../utils/display';
 import useSelectedCity from '../../hooks/use-selected-city';
 
@@ -48,7 +48,7 @@ function LightPanel() {
           {
             cityState.cities.map(city => <CityCard
               key={city.id}
-              name={display([city.data.name, city.data.state, city.data.country], 2)}
+              city={city}
               isSelected={cityState.selectedCityId === city.id}
               onSelected={() => selectCity(city)} />
             )

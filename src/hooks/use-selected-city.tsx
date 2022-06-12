@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react'
-import { CityContext } from '../context/city-context'
+import { CityContext } from '../context/city-context/city-context'
 
 function useSelectedCity() {
 
