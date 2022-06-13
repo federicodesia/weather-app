@@ -8,6 +8,7 @@ import { CityContext } from './city-context';
 import { cityReducer } from './city-reducer';
 
 export const initialState: CityState = {
+    isLoading: true,
     ongoingRequests: 0,
     searchSuggestions: undefined,
     cities: readLocalStorage('cities', []),
@@ -75,7 +76,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
 
     const deleteCity = (city: City) => {
         dispatch({ type: 'deleteCity', payload: city })
-    } 
+    }
 
     const setLoading = (value: boolean) => {
         dispatch({

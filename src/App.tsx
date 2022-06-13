@@ -2,23 +2,30 @@ import './App.css';
 
 import DarkPanel from './components/dark-panel/dark-panel'
 import LightPanel from './components/light-panel/light-panel';
+import WeatherLoader from './components/weather-loader/weather-loader';
+import { CityContext } from './context/city-context/city-context';
 import { CityProvider } from './context/city-context/city-provider';
 import { ContextMenuProvider } from './context/context-menu-context/context-menu-provider';
 
 function App() {
   return (
     <div className='App'>
-      <div className='main-container'>
-
-        <ContextMenuProvider>
-          <CityProvider>
-            <LightPanel />
-            <DarkPanel />
-          </CityProvider>
-        </ContextMenuProvider>
-      </div>
+      <ContextMenuProvider>
+        <CityProvider>
+          <CityContext.Consumer>
+            {
+              context => context.cityState.isLoading
+                ? <WeatherLoader />
+                : <div className='main-container'>
+                  <LightPanel />
+                  <DarkPanel />
+                </div>
+            }
+          </CityContext.Consumer>
+        </CityProvider>
+      </ContextMenuProvider>
     </div>
-  );
+  )
 }
 
 export default App;

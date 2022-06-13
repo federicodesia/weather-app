@@ -19,6 +19,7 @@ export interface City {
 }
 
 export interface CityState {
+    isLoading: boolean
     ongoingRequests: number
     searchSuggestions?: CityData[]
     cities: City[]
