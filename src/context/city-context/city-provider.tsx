@@ -34,7 +34,7 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     }, [cityState.selectedCityId])
 
     useEffect(() => {
-        
+
         const initialFetch = async () => {
             if (cityState.cities.length > 0) {
                 await selectCity(cityState.cities.find(city =>
@@ -91,7 +91,10 @@ export const CityProvider = ({ children }: CityProviderProps) => {
 
     const selectCity = async (city: City) => {
         dispatch({ type: 'selectCity', payload: city })
+        await refreshCity(city)
+    }
 
+    const refreshCity = async (city: City) => {
         if (new Date().getTime() - city.updatedAt > 5 * 60 * 1000) {
             dispatch({
                 type: 'updateCity',
@@ -101,7 +104,16 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     }
 
     const deleteCity = (city: City) => {
-        dispatch({ type: 'deleteCity', payload: city })
+        const { cities, selectedCityId } = cityState
+
+        if(cities.length > 1){
+            if(selectedCityId === city.id){
+                const index = cities.indexOf(city)
+                const newSelectedCity = cities.at(index + 1) ?? cities.at(index - 1)
+                if (newSelectedCity) selectCity(newSelectedCity)
+            }
+            dispatch({ type: 'deleteCity', payload: city })
+        }
     }
 
     const setLoading = (value: boolean) => {
@@ -136,7 +148,8 @@ export const CityProvider = ({ children }: CityProviderProps) => {
             searchCity,
             addCity,
             selectCity,
-            deleteCity
+            deleteCity,
+            refreshCity
         }}>
             {children}
         </CityContext.Provider>

@@ -7,18 +7,20 @@ import { City } from '../../interfaces/city';
 import display from '../../utils/display';
 import ContextMenu from '../context-menu/context-menu';
 
-import { MdCheck, MdDelete } from "react-icons/md";
+import { MdCheck, MdDelete, MdRefresh } from "react-icons/md";
 
 type CityCardProps = {
     city: City
-    isSelected: boolean
-    onSelected: () => void
 };
 
-function CityCard({ city, isSelected, onSelected }: CityCardProps) {
+function CityCard({ city }: CityCardProps) {
 
-    const { selectCity, deleteCity } = useContext(CityContext)
+    const { cityState, selectCity, deleteCity, refreshCity } = useContext(CityContext)
     const { showContextMenu } = useContext(ContextMenuContext)
+
+    const isSelected = cityState.selectedCityId === city.id;
+    const onRefresh = () => refreshCity(city)
+    const onSelect = () => selectCity(city)
 
     const handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault()
@@ -26,12 +28,19 @@ function CityCard({ city, isSelected, onSelected }: CityCardProps) {
         showContextMenu(<ContextMenu
             event={e}
             items={[
+                ...isSelected
+                    ? [{
+                        icon: <MdRefresh />,
+                        text: 'Refresh',
+                        onClick: () => onRefresh()
+                    }]
+                    : [{
+                        icon: <MdCheck />,
+                        text: 'Select',
+                        onClick: () => onSelect()
+                    }],
                 {
-                    icon: <MdCheck />,
-                    text: 'Select',
-                    onClick: () => selectCity(city)
-                },
-                {
+                    isDisabled: cityState.cities.length === 1,
                     icon: <MdDelete />,
                     text: 'Delete',
                     onClick: () => deleteCity(city)
@@ -44,10 +53,10 @@ function CityCard({ city, isSelected, onSelected }: CityCardProps) {
         <div className={styles.container}>
             <div
                 className={`${styles.card} ${isSelected && styles.selected}`}
-                onClick={onSelected}
+                onClick={onSelect}
                 onContextMenu={handleContextMenu} />
 
-            <h5 onClick={onSelected}>
+            <h5 onClick={onSelect}>
                 {
                     display([
                         city.data.name,

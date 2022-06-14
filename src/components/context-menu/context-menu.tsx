@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import styles from './context-menu.module.css';
 
 type ContextMenuItem = {
+    isDisabled?: boolean
     icon: ReactNode
     text: string
     onClick: () => void
@@ -30,7 +31,8 @@ function ContextMenu({ event, items }: ContextMenuMenuProps) {
                     items.map((item, index) => {
                         return <li
                             key={`${item.text} ${index}`}
-                            onClick={item.onClick}>
+                            onClick={item.isDisabled ? undefined : item.onClick}
+                            className={`${item.isDisabled ? styles.disabled : styles.enabled}`} >
 
                             <div className={styles.icon}>{item.icon}</div>
                             <span>{item.text}</span>

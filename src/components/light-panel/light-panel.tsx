@@ -12,7 +12,7 @@ import useSelectedCity from '../../hooks/use-selected-city';
 
 function LightPanel() {
 
-  const { cityState, searchCity, addCity, selectCity } = useContext(CityContext)
+  const { cityState, searchCity, addCity } = useContext(CityContext)
   const selectedCity = useSelectedCity()
 
   const suggestions = cityState.searchSuggestions?.map(city => {
@@ -48,9 +48,7 @@ function LightPanel() {
           {
             cityState.cities.map(city => <CityCard
               key={city.id}
-              city={city}
-              isSelected={cityState.selectedCityId === city.id}
-              onSelected={() => selectCity(city)} />
+              city={city} />
             )
           }
         </div>
