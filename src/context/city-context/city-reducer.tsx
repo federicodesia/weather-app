@@ -1,6 +1,7 @@
 import { City, CityData, CityState } from "../../interfaces/city";
 
 type CityAction =
+    | { type: 'setIsLoading', payload: boolean }
     | { type: 'setOngoingRequests', payload: number }
     | { type: 'setSuggestions', payload: CityData[] | undefined }
     | { type: 'addCity', payload: City }
@@ -14,6 +15,12 @@ export const cityReducer = (
 ): CityState => {
 
     switch (action.type) {
+        case 'setIsLoading':
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+
         case 'setOngoingRequests':
             return {
                 ...state,

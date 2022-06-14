@@ -43,7 +43,7 @@
     
     opacity: 0.3;
     transform: scale(0.5) translate(6em, -3em);
-    animation: cloud-animation 2s ease-in-out infinite;
+    animation: cloud-animation 1.5s ease-in-out infinite;
 }
 
 @keyframes cloud-animation {

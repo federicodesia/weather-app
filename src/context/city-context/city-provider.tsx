@@ -1,6 +1,7 @@
-import { useEffect, useReducer } from 'react';
-import { City, CityData, CityState } from '../../interfaces/city';
+import { useEffect, useReducer, useRef } from 'react';
+import { City, CityData, CityState, initialCities } from '../../interfaces/city';
 import { getCities, getForecast, getWeather } from '../../services/weather/weather-service';
+import { awaitAtLeast } from '../../utils/await-at-least';
 import { daysForecast, forecastFromResponse, rainForecast } from '../../utils/converters/forecast-converter';
 import weatherFromResponse from '../../utils/converters/weather-converter';
 import { readLocalStorage, writeLocalStorage } from '../../utils/local-storage';
@@ -21,6 +22,7 @@ interface CityProviderProps {
 
 export const CityProvider = ({ children }: CityProviderProps) => {
 
+    const ignoreEffect = useRef(false)
     const [cityState, dispatch] = useReducer(cityReducer, initialState);
 
     useEffect(() => {
@@ -30,6 +32,30 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     useEffect(() => {
         writeLocalStorage('selectedCityId', cityState.selectedCityId)
     }, [cityState.selectedCityId])
+
+    useEffect(() => {
+        
+        const initialFetch = async () => {
+            if (cityState.cities.length > 0) {
+                await selectCity(cityState.cities.find(city =>
+                    city.id === cityState.selectedCityId
+                ) ?? cityState.cities[0])
+            }
+            else {
+                await Promise.all(initialCities.map(async (city) => {
+                    await addCity(city)
+                }));
+            }
+        }
+
+        if (!ignoreEffect.current) {
+            awaitAtLeast(initialFetch, 1500).then(() => {
+                dispatch({ type: 'setIsLoading', payload: false })
+            })
+        }
+
+        return () => { ignoreEffect.current = true }
+    }, [])
 
     const searchCity = async (value: string) => {
         dispatch({

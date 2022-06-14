@@ -25,3 +25,27 @@ export interface CityState {
     cities: City[]
     selectedCityId?: number
 }
+
+export const initialCities: CityData[] = [
+    {
+        lat: 52.5170365,
+        lon: 13.3888599,
+        name: 'Berlin',
+        state: 'Berlin',
+        country: 'Germany'
+    },
+    {
+        lat: 48.8588897,
+        lon: 2.3200410217200766,
+        name: "Paris",
+        state: "Ile-de-France",
+        country: "France"
+    },
+    {
+        lat: 40.7127281,
+        lon: -74.0060152,
+        name: "New York",
+        state: "New York",
+        country: "United States"
+    }
+]
