@@ -2,8 +2,10 @@
     position: relative;
     background-color: #100E3B;
     color: white;
+
     min-width: 400px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .container * {
@@ -19,13 +21,34 @@
     left: 0;
 }
 
-.content{
+.content {
+    flex-grow: 1;
+
     display: flex;
     flex-direction: column;
-
-    box-sizing: border-box;
-    height: 100%;
+    align-items: stretch;
     padding: 48px 40px;
+    gap: 24px;
+}
+
+.navBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+    gap: 24px;
+}
+
+.navBar .drawerIcon {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+.navBar .header {
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 32px;
 }
 
 .currentWeather {
@@ -35,6 +58,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    padding: 24px 0px;
     gap: 16px;
 }
 
@@ -55,7 +80,6 @@
 }
 
 #todayIcon {
-    color: #4394EC;
     margin-right: 16px;
 }
 
@@ -92,4 +116,26 @@
 
 #dot {
     margin: 0px 12px;
+}
+
+@media only screen and (max-width: 769px) {
+    .container {
+        height: 100%;
+        min-width: 100%;
+    }
+
+    .content {
+        padding: 0px 24px;
+        padding-bottom: 24px;
+    }
+
+    .roundedContainer {
+        padding: 24px;
+        border-radius: 24px;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .currentWeather {
+        flex-grow: 0;
+    }
 }
