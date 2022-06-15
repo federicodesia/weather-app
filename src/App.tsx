@@ -9,7 +9,7 @@ import { ContextMenuProvider } from './context/context-menu-context/context-menu
 import useMediaQuery from './hooks/use-media-query';
 
 function App() {
-  const isMobile = useMediaQuery('(max-width: 769px)')
+  const isLarge = useMediaQuery('(min-width: 801px)')
 
   return (
     <div className='App'>
@@ -19,7 +19,7 @@ function App() {
             {
               context => context.cityState.isLoading
                 ? <WeatherLoader />
-                : isMobile
+                : !isLarge
                   ? <DarkPanel />
                   : <div className='rounded-container'>
                     <LightPanel />

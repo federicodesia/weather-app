@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import clamp from '../../utils/clamp';
 import { Forecast } from '../../interfaces/forecast';
 import WeatherIcon from '../weather-icon/weather-icon';
+import useMediaQuery from '../../hooks/use-media-query';
 
 type NextDaysForecastProps = {
     selectedCityId?: number
@@ -12,6 +13,17 @@ type NextDaysForecastProps = {
 }
 
 function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) {
+
+    const isLarge = useMediaQuery('(max-width: 800px)')
+    const isSmall = useMediaQuery('(max-width: 640px)')
+    const isExtraSmall = useMediaQuery('(max-width: 480px)')
+
+    const displayDay = (dt: number) => {
+        const date = new Date(dt)
+        return isExtraSmall
+            ? date.toLocaleDateString('en-US', { weekday: 'short' }) + '.'
+            : date.toLocaleDateString('en-US', { weekday: 'long' })
+    }
 
     const separator = 20;
     const longestBar = useMemo(
@@ -48,13 +60,14 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
                 {days.map((day) => {
                     return <tr key={`${selectedCityId} ${day.dt}`}>
                         <th>
-                            {new Date(day.dt).toLocaleDateString('en-US', { weekday: 'long' })}
+                            {displayDay(day.dt)}
                         </th>
 
                         <td id={styles.pop}>
                             <IoWater id={styles.waterIcon} size={15} />
                             {`${day.pop}%`}
                         </td>
+
                         <td id={styles.weatherIcon}>
                             <WeatherIcon icon={day.icon} pod={'d'} />
                         </td>
@@ -63,13 +76,15 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
                             {`${day.tempMin}°C`}
                         </td>
 
-                        <td className={styles.tempBar}>
-                            <div className='vertical-dashed-line absolute-center'></div>
-                            <div className='horizontal-dashed-line absolute-center'></div>
+                        {
+                            !isSmall && <td className={styles.tempBar}>
+                                <div className={`vertical-dashed-line ${isLarge && 'light'} absolute-center`}></div>
+                                <div className={`horizontal-dashed-line ${isLarge && 'light'} absolute-center`}></div>
 
-                            <div className={styles.left} style={getTempBarStyle(day, "left")}></div>
-                            <div className={styles.right} style={getTempBarStyle(day, "right")}></div>
-                        </td>
+                                <div className={styles.left} style={getTempBarStyle(day, "left")}></div>
+                                <div className={styles.right} style={getTempBarStyle(day, "right")}></div>
+                            </td>
+                        }
 
                         <td id={styles.maxTemp}>{`${day.tempMax}°C`}</td>
                     </tr>

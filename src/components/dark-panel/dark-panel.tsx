@@ -8,10 +8,11 @@ import WeatherIcon from '../weather-icon/weather-icon';
 import ProbabilityRain from '../probability-rain/probability-rain';
 import useMediaQuery from '../../hooks/use-media-query';
 import { MdShortText } from 'react-icons/md';
+import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 function DarkPanel() {
 
-  const isMobile = useMediaQuery('(max-width: 769px)')
+  const isLarge = useMediaQuery('(min-width: 801px)')
 
   const selectedCity = useSelectedCity()
   const { data, weather } = selectedCity ?? {}
@@ -31,7 +32,7 @@ function DarkPanel() {
 
         <div className='column expand'>
           {
-            isMobile && <div className={styles.navBar}>
+            !isLarge && <div className={styles.navBar}>
               <MdShortText className={styles.drawerIcon} />
               <h4 className={styles.header}>Weather Forecast</h4>
             </div>
@@ -84,6 +85,15 @@ function DarkPanel() {
                 </span>
               </div>
             </div>
+
+            {
+              !isLarge && <div className={styles.roundedContainer}>
+                <NextDaysForecast
+                  selectedCityId={selectedCity?.id}
+                  days={selectedCity?.forecast}
+                />
+              </div>
+            }
 
             <div className={styles.roundedContainer} >
               <ProbabilityRain items={selectedCity?.rainForecast} />

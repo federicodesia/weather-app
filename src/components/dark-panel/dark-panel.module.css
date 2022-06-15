@@ -1,6 +1,6 @@
 .container {
     position: relative;
-    background-color: #100E3B;
+    background-color: #10103B;
     color: white;
 
     min-width: 400px;
@@ -48,7 +48,7 @@
 .navBar .header {
     flex-grow: 1;
     text-align: center;
-    margin-right: 32px;
+    margin-right: 56px;
 }
 
 .currentWeather {
@@ -118,7 +118,7 @@
     margin: 0px 12px;
 }
 
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 800px) {
     .container {
         height: 100%;
         min-width: 100%;
@@ -132,7 +132,7 @@
     .roundedContainer {
         padding: 24px;
         border-radius: 24px;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0,0, 0, 0.3);
     }
 
     .currentWeather {

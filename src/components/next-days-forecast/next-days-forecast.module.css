@@ -2,6 +2,8 @@
     border-spacing: 0;
     border-collapse: collapse;
     text-align: center;
+
+    width: 100%;
 }
 
 .table th {
@@ -26,7 +28,7 @@
     vertical-align: middle;
 }
 
-#weatherIcon{
+#weatherIcon {
     display: flex;
     justify-content: center;
 }
@@ -35,14 +37,6 @@
     color: #4394EC;
     margin-bottom: 3px;
     margin-right: 4px;
-}
-
-#maxTemp {
-    color: inherit;
-    text-align: right;
-    width: 45px;
-    min-width: 45px;
-    padding-right: 0;
 }
 
 .tempBar {
@@ -72,12 +66,51 @@
     background-color: #FA4400;
 }
 
-#minTemp {
-    width: 60px;
+#pop {
     min-width: 60px;
 }
 
-#pop {
-    width: 60px;
-    min-width: 60px;
+#maxTemp {
+    color: inherit;
+    text-align: right;
+    padding-right: 0;
+}
+
+@media only screen and (max-width: 800px) {
+    .table td {
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+    .tempBar .left {
+        background-color: rgba(209, 228, 248, 0.75);
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    #minTemp {
+        min-width: 60px;
+    }
+
+    #maxTemp {
+        min-width: 45px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .table td {
+        padding: 12px
+    }
+
+    #pop {
+        width: 25%
+    }
+
+    #minTemp {
+        width: 20%
+    }
+
+    #maxTemp {
+        width: 15%
+    }
 }
