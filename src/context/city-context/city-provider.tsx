@@ -106,8 +106,8 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     const deleteCity = (city: City) => {
         const { cities, selectedCityId } = cityState
 
-        if(cities.length > 1){
-            if(selectedCityId === city.id){
+        if (cities.length > 1) {
+            if (selectedCityId === city.id) {
                 const index = cities.indexOf(city)
                 const newSelectedCity = cities.at(index + 1) ?? cities.at(index - 1)
                 if (newSelectedCity) selectCity(newSelectedCity)
@@ -116,21 +116,12 @@ export const CityProvider = ({ children }: CityProviderProps) => {
         }
     }
 
-    const setLoading = (value: boolean) => {
-        dispatch({
-            type: 'setOngoingRequests',
-            payload: value
-                ? cityState.ongoingRequests + 1
-                : cityState.ongoingRequests - 1
-        })
-    }
-
     const fetchCity = async (data: CityData): Promise<City> => {
 
-        setLoading(true)
+        dispatch({ type: 'setOngoingRequest', payload: true })
         const weatherResponse = await getWeather(data.lat, data.lon);
         const forecast = forecastFromResponse(await getForecast(data.lat, data.lon))
-        setLoading(false)
+        dispatch({ type: 'setOngoingRequest', payload: false })
 
         return {
             id: weatherResponse.id,

@@ -2,7 +2,7 @@ import { City, CityData, CityState } from "../../interfaces/city";
 
 type CityAction =
     | { type: 'setIsLoading', payload: boolean }
-    | { type: 'setOngoingRequests', payload: number }
+    | { type: 'setOngoingRequest', payload: boolean }
     | { type: 'setSuggestions', payload: CityData[] | undefined }
     | { type: 'addCity', payload: City }
     | { type: 'selectCity', payload: City }
@@ -21,10 +21,12 @@ export const cityReducer = (
                 isLoading: action.payload
             }
 
-        case 'setOngoingRequests':
+        case 'setOngoingRequest':
             return {
                 ...state,
                 ongoingRequests: action.payload
+                    ? state.ongoingRequests + 1
+                    : state.ongoingRequests - 1
             }
 
         case 'setSuggestions':
