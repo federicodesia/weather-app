@@ -26,6 +26,10 @@
     padding: 0px 40px;
 }
 
+.searchBarContainer {
+    max-width: 300px;
+}
+
 .header * {
     display: inline;
 }
@@ -34,7 +38,7 @@
     height: 5px;
     width: 100%;
     background-color: #A1C2FA;
-    
+
     display: inline-block;
     position: relative;
     overflow: hidden;

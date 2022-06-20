@@ -3,7 +3,6 @@
   --suggestion-height: 45px;
 
   position: relative;
-  max-width: 300px;
   height: var(--input-height);
 }
 
@@ -18,7 +17,7 @@
 }
 
 .expandedContent {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 16px
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 16px;
 }
 
 .inputContainer {
@@ -66,4 +65,23 @@
 .suggestionsContainer li:hover,
 .suggestionsContainer .focused {
   background-color: #EEEEEE;
+}
+
+@media only screen and (max-width: 800px) {
+  .content {
+    background-color: #0A0B16;
+  }
+
+  .expandedContent {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 24px;
+  }
+
+  .inputContainer input {
+    color: white;
+  }
+
+  .suggestionsContainer li:hover,
+  .suggestionsContainer .focused {
+    background-color: rgba(255, 255, 255, 0.008);
+  }
 }

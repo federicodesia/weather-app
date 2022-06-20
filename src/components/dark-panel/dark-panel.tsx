@@ -9,6 +9,8 @@ import ProbabilityRain from '../probability-rain/probability-rain';
 import useMediaQuery from '../../hooks/use-media-query';
 import { MdShortText } from 'react-icons/md';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
+import SideDrawer from '../side-drawer/side-drawer';
+import { useState } from 'react';
 
 function DarkPanel() {
 
@@ -20,7 +22,9 @@ function DarkPanel() {
 
   const sunset = sys ? new Date(sys.sunset) : undefined
 
-  return (
+  const [isDrawerExpanded, setDrawerExpanded] = useState(false)
+
+  return <>
     <div className={styles.container}>
       <div className={styles.clouds}>
         <IoMdCloudy size={220} id={styles.cloud1} />
@@ -33,7 +37,7 @@ function DarkPanel() {
         <div className='column expand'>
           {
             !isLarge && <div className={styles.navBar}>
-              <MdShortText className={styles.drawerIcon} />
+              <MdShortText className={styles.drawerIcon} onClick={() => setDrawerExpanded(true)} />
               <h4 className={styles.header}>Weather Forecast</h4>
             </div>
           }
@@ -102,7 +106,13 @@ function DarkPanel() {
         </div>
       </div>
     </div>
-  );
+
+    {
+      !isLarge && <SideDrawer
+        isExpanded={isDrawerExpanded}
+        onClose={() => setDrawerExpanded(false)} />
+    }
+  </>;
 }
 
 export default DarkPanel;

@@ -1,0 +1,59 @@
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.drawer.expanded {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.menu {
+    color: rgba(255, 255, 255, 0.85);
+
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+
+    background-color: #060711;
+    gap: 12px;
+    padding: 24px;
+
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+
+.expanded .menu {
+    transform: translateX(0%);
+}
+
+@media only screen and (min-width: 481px) {
+    .menu {
+        max-width: 400px;
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.backIcon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.cities {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

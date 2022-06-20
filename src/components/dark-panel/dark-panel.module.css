@@ -1,6 +1,7 @@
 .container {
     position: relative;
-    background-color: #10103B;
+    background-color: #0E0F30;
+
     color: white;
 
     min-width: 400px;
@@ -88,7 +89,7 @@
 }
 
 .clouds {
-    color: #1E1D46;
+    color: rgba(30, 29, 70, 0.75);
     position: relative;
 }
 
@@ -122,6 +123,7 @@
     .container {
         height: 100%;
         min-width: 100%;
+        background: linear-gradient(#0E0F30 0%, #0B0C1E 100%);
     }
 
     .content {
@@ -132,7 +134,7 @@
     .roundedContainer {
         padding: 24px;
         border-radius: 24px;
-        background-color: rgba(0,0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.3);
     }
 
     .currentWeather {

@@ -31,12 +31,14 @@ function LightPanel() {
       <div className={styles.contentContainer}>
         <div className={styles.contentPadding}>
 
-          <SearchBar
-            placeholder='Search new place'
-            prefix={<IoSearchOutline />}
-            suggestions={suggestions}
-            onSearch={searchCity}
-            onSelected={addCity} />
+          <div className={styles.searchBarContainer}>
+            <SearchBar
+              placeholder='Search new place'
+              prefix={<IoSearchOutline />}
+              suggestions={suggestions}
+              onSearch={searchCity}
+              onSelected={addCity} />
+          </div>
 
           <div className={styles.header}>
             <h2>Weather </h2>

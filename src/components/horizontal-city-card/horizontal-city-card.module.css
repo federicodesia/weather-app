@@ -1,0 +1,38 @@
+.container {
+    margin: 0;
+
+    background-color: #0A0B16;
+    padding: 24px;
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    cursor: pointer;
+}
+
+.container * {
+    margin: 0;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lightText {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
