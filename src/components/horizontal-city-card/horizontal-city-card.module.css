@@ -6,10 +6,7 @@
     border-radius: 12px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 16px;
-
     cursor: pointer;
 }
 
@@ -18,6 +15,9 @@
 }
 
 .left {
+    flex-grow: 1;
+    margin-right: 16px;
+
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -35,4 +35,27 @@
     display: flex;
     flex-direction: row;
     gap: 12px;
+}
+
+.check {
+    color: #4394EC;
+    height: 0px;
+    width: 0px;
+    min-height: 0px;
+    min-width: 0px;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.check.visible {
+    visibility: visible;
+    opacity: 1;
+
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    margin-right: 16px;
 }

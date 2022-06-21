@@ -1,21 +1,31 @@
 import styles from './horizontal-city-card.module.css';
 
-import { useContext } from 'react';
-import { ContextMenuContext } from '../../context/context-menu-context/context-menu-context';
 import { City } from '../../interfaces/city';
 import display from '../../utils/display';
 import WeatherIcon from '../weather-icon/weather-icon';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { useLongPress } from '../../hooks/use-long-press';
 
 type HorizontalCityCardProps = {
     city: City
+    isChecked: boolean,
     onSelect: () => void
+    onLongPress: () => void
 };
 
-function HorizontalCityCard({ city, onSelect }: HorizontalCityCardProps) {
+function HorizontalCityCard({ city, isChecked, onSelect, onLongPress }: HorizontalCityCardProps) {
+    const handleLongPress = useLongPress({
+        onClick: onSelect,
+        onLongPress: onLongPress
+    });
 
     return <div
         className={styles.container}
-        onClick={onSelect}>
+        {...handleLongPress}>
+
+        {
+            <IoIosCheckmarkCircle className={`${styles.check} ${isChecked && styles.visible}`} />
+        }
 
         <div className={styles.left}>
             <h4>{city.data.name} </h4>
