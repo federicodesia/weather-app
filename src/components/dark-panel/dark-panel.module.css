@@ -135,6 +135,7 @@
         padding: 24px;
         border-radius: 24px;
         background-color: rgba(0, 0, 0, 0.3);
+        overflow-x: hidden;
     }
 
     .currentWeather {

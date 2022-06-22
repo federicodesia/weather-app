@@ -46,27 +46,26 @@ function SideDrawer({ isExpanded, onClose }: SideDrawerProps) {
 
     return (
         <div className={`${styles.drawer} ${isExpanded && styles.expanded}`}>
-
             <div className={styles.menu} ref={menuRef}>
-                <div className={styles.content}>
 
-                    <div className={styles.header}>
-                        <IoChevronBack
-                            className={styles.backIcon}
-                            onClick={onClose} />
-                        <h4>Cities</h4>
-                    </div>
+                <div className={styles.header}>
+                    <IoChevronBack
+                        className={styles.backIcon}
+                        onClick={onClose} />
+                    <h4>Cities</h4>
+                </div>
 
-                    <SearchBar
-                        placeholder='Search new place'
-                        prefix={<IoSearchOutline />}
-                        suggestions={suggestions}
-                        onSearch={searchCity}
-                        onSelected={(city) => {
-                            addCity(city)
-                            onClose()
-                        }} />
+                <SearchBar
+                    placeholder='Search new place'
+                    prefix={<IoSearchOutline />}
+                    suggestions={suggestions}
+                    onSearch={searchCity}
+                    onSelected={(city) => {
+                        addCity(city)
+                        onClose()
+                    }} />
 
+                <div className={styles.scrolleableArea}>
                     <ul className={styles.cities}>
                         {
                             cityState.cities.map(city => <HorizontalCityCard
@@ -86,28 +85,30 @@ function SideDrawer({ isExpanded, onClose }: SideDrawerProps) {
                     </ul>
                 </div>
 
-                <ul className={`${styles.cityActions} ${cityAction && styles.visible}`}>
-                    {
-                        cityState.selectedCityId === cityAction?.id
-                            ? <li onClick={onSelectAction}>
-                                <MdOutlineRefresh className={styles.icon} />
-                                <span>Refresh</span>
-                            </li>
+                <div className={`${styles.cityActionsContainer} ${cityAction && styles.visible}`}>
+                    <ul className={styles.cityActions}>
+                        {
+                            cityState.selectedCityId === cityAction?.id
+                                ? <li onClick={onSelectAction}>
+                                    <MdOutlineRefresh className={styles.icon} />
+                                    <span>Refresh</span>
+                                </li>
 
-                            : <li onClick={onRefreshAction}>
-                                <MdOutlineCheck className={styles.icon} />
-                                <span>Select</span>
-                            </li>
-                    }
+                                : <li onClick={onRefreshAction}>
+                                    <MdOutlineCheck className={styles.icon} />
+                                    <span>Select</span>
+                                </li>
+                        }
 
-                    {
-                        cityState.cities.length > 1 && <li
-                            onClick={onDeleteAction}>
-                            <MdOutlineDelete className={styles.icon} />
-                            <span>Delete</span>
-                        </li>
-                    }
-                </ul>
+                        {
+                            cityState.cities.length > 1 && <li
+                                onClick={onDeleteAction}>
+                                <MdOutlineDelete className={styles.icon} />
+                                <span>Delete</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     )

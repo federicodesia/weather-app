@@ -1,5 +1,5 @@
 .drawer {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -9,23 +9,25 @@
     transition: all 0.3s ease;
 }
 
+.drawer * {
+    box-sizing: border-box;
+}
+
 .drawer.expanded {
     visibility: visible;
     background-color: rgba(0, 0, 0, 0.35);
 }
 
 .menu {
-    color: rgba(255, 255, 255, 0.85);
-
-    box-sizing: border-box;
     height: 100%;
-
+    color: rgba(255, 255, 255, 0.85);
     background-color: #060711;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 12px;
+
     padding: 24px;
+    gap: 12px;
 
     transform: translateX(-100%);
     transition: all 0.3s ease;
@@ -33,6 +35,12 @@
 
 .expanded .menu {
     transform: translateX(0%);
+}
+
+.scrolleableArea {
+    flex: 1;
+    border-radius: 12px;
+    overflow-y: overlay;
 }
 
 @media only screen and (min-width: 481px) {
@@ -57,24 +65,34 @@
 .cities {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    overflow-y: auto;
+    padding: 0px;
+    gap: 10px;
+}
+
+.cityActionsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transform: translateY(300%);
+    transition: all 0.3s ease, opacity 0.15s ease;
+}
+
+.cityActionsContainer.visible {
+    visibility: visible;
+    opacity: 1;
+    height: 75px;
+    transform: translateY(0%);
 }
 
 .cityActions {
     display: flex;
     justify-content: space-evenly;
-
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: all 0.3s ease, opacity 0.15s ease;
-}
-
-.cityActions.visible {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0%);
 }
 
 .cityActions li {
@@ -88,6 +106,6 @@
 }
 
 .cityActions .icon {
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
 }

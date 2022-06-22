@@ -4,6 +4,7 @@
 
   position: relative;
   height: var(--input-height);
+  z-index: 1;
 }
 
 .content {

@@ -41,13 +41,17 @@ export function useLongPress({
         }
     }, [preventDefault, onClick, longPressTriggered]);
 
+    const handleContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault()
+        callback()
+    }
+
     return useMemo(
         () => ({
             onMouseDown: start,
             onMouseUp: stop,
             onMouseLeave: (e: React.MouseEvent) => stop(e, false),
-            onTouchStart: start,
-            onTouchEnd: stop,
+            onContextMenu: handleContextMenu
         }),
         [start, stop]
     );
