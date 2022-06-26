@@ -4,6 +4,7 @@ import App from './App';
 
 import './theme/theme.css';
 import './theme/dashed-line.css';
+import './theme/loading-bar.css';
 
 import './utils/number'
 import './utils/array'

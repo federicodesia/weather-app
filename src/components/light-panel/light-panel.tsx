@@ -25,7 +25,9 @@ function LightPanel() {
   return (
     <div className={styles.container}>
       {
-        cityState.ongoingRequests > 0 && <div className={styles.loadingBar} />
+        cityState.ongoingRequests > 0 && <div className={styles.absoluteContent}>
+          <div className='loading-bar' />
+        </div>
       }
 
       <div className={styles.contentContainer}>

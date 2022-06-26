@@ -10,7 +10,8 @@ import useMediaQuery from '../../hooks/use-media-query';
 import { MdShortText } from 'react-icons/md';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 import SideDrawer from '../side-drawer/side-drawer';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CityContext } from '../../context/city-context/city-context';
 
 function DarkPanel() {
 
@@ -18,6 +19,7 @@ function DarkPanel() {
   const minHeight = useMediaQuery('(min-height: 801px)')
   const isLarge = minWidth && minHeight
 
+  const { cityState } = useContext(CityContext)
   const selectedCity = useSelectedCity()
   const { data, weather } = selectedCity ?? {}
   const { icon, main, sys } = weather ?? {}
@@ -33,6 +35,10 @@ function DarkPanel() {
         <IoMdCloudy size={220} id={styles.cloud2} />
         <IoMdCloudy size={100} id={styles.cloud3} />
       </div>
+
+      {
+        !isLarge && cityState.ongoingRequests > 0 && <div className='loading-bar' />
+      }
 
       <div className={styles.absoluteContent}>
 

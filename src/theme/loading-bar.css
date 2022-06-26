@@ -1,0 +1,37 @@
+.loading-bar {
+    height: 5px;
+    width: 100%;
+    background-color: #A1C2FA;
+
+    position: relative;
+    overflow: hidden;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 24px;
+    z-index: 1;
+}
+
+.loading-bar::after {
+    content: '';
+
+    height: 5px;
+    width: 50%;
+    background-color: #3B78E7;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    animation: loading-bar-animation 2s ease infinite;
+}
+
+@keyframes loading-bar-animation {
+    0% {
+        left: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        left: 100%;
+        transform: translateX(0%);
+    }
+}
