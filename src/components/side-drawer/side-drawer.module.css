@@ -28,6 +28,7 @@
 
     padding: 24px;
     gap: 12px;
+    overflow: hidden;
 
     transform: translateX(-100%);
     transition: all 0.3s ease;
@@ -41,6 +42,10 @@
     flex: 1;
     border-radius: 12px;
     overflow-y: overlay;
+}
+
+.scrolleableArea::-webkit-scrollbar-thumb {
+    background-color: #22232C;
 }
 
 @media only screen and (min-width: 481px) {
@@ -86,7 +91,7 @@
 .cityActionsContainer.visible {
     visibility: visible;
     opacity: 1;
-    height: 75px;
+    height: 65px;
     transform: translateY(0%);
 }
 

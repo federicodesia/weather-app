@@ -1,6 +1,6 @@
 import styles from './search-bar.module.css';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Suggestion } from '../../interfaces/suggestion';
 import useDebounce from '../../hooks/use-debounce';
 import clamp from '../../utils/clamp';
@@ -15,6 +15,8 @@ type SearchBarProps = {
 }
 
 function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: SearchBarProps) {
+
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useState('')
     const debouncedValue = useDebounce(value, 500)
@@ -49,9 +51,13 @@ function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: S
         if (!isFocused || suggestions === undefined) return {}
 
         const length = clamp(suggestions.length, 1)
+        const positionY = containerRef.current?.offsetTop ?? 0
+
         return {
-            height: `calc(${length} * var(--suggestion-height))`,
-            paddingBottom: 16
+            height: `min(
+                calc(${length} * var(--suggestion-height) + 16px),
+                calc(100vh - var(--input-height) - ${positionY}px - 24px)
+            )`
         }
     }
 
@@ -59,7 +65,8 @@ function SearchBar({ placeholder, prefix, suggestions, onSearch, onSelected }: S
         <div
             className={styles.container}
             onFocus={onFocus}
-            onBlur={onBlur}>
+            onBlur={onBlur}
+            ref={containerRef}>
             <div className={`${styles.content} ${suggestions !== undefined && isFocused && styles.expandedContent}`}>
                 <div className={styles.inputContainer}>
                     {

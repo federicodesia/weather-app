@@ -6,7 +6,11 @@
 
     min-width: 400px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: overlay;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #2D2E4A
 }
 
 .container * {
@@ -20,6 +24,10 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.clouds {
+    z-index: 0;
 }
 
 .content {
@@ -119,7 +127,8 @@
     margin: 0px 12px;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px),
+(max-height: 800px) {
     .container {
         height: 100%;
         min-width: 100%;
@@ -129,9 +138,14 @@
     .content {
         padding: 0px 24px;
         padding-bottom: 24px;
+        align-items: center;
     }
 
     .roundedContainer {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 800px;
+
         padding: 24px;
         border-radius: 24px;
         background-color: rgba(0, 0, 0, 0.3);

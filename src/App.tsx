@@ -9,7 +9,9 @@ import { ContextMenuProvider } from './context/context-menu-context/context-menu
 import useMediaQuery from './hooks/use-media-query';
 
 function App() {
-  const isLarge = useMediaQuery('(min-width: 801px)')
+  const minWidth = useMediaQuery('(min-width: 1201px)')
+  const minHeight = useMediaQuery('(min-height: 801px)')
+  const isLarge = minWidth && minHeight
 
   return (
     <div className='App'>

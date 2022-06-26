@@ -14,13 +14,16 @@ type NextDaysForecastProps = {
 
 function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) {
 
-    const isLarge = useMediaQuery('(max-width: 800px)')
-    const isSmall = useMediaQuery('(max-width: 640px)')
-    const isExtraSmall = useMediaQuery('(max-width: 480px)')
+    const minWidth = useMediaQuery('(min-width: 1201px)')
+    const minHeight = useMediaQuery('(min-height: 801px)')
+    const isLarge = minWidth && minHeight
+
+    const isMedium = useMediaQuery('(max-width: 640px)')
+    const isSmall = useMediaQuery('(max-width: 480px)')
 
     const displayDay = (dt: number) => {
         const date = new Date(dt)
-        return isExtraSmall
+        return isSmall
             ? date.toLocaleDateString('en-US', { weekday: 'short' }) + '.'
             : date.toLocaleDateString('en-US', { weekday: 'long' })
     }
@@ -77,9 +80,9 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
                         </td>
 
                         {
-                            !isSmall && <td className={styles.tempBar}>
-                                <div className={`vertical-dashed-line ${isLarge && 'light'} absolute-center`}></div>
-                                <div className={`horizontal-dashed-line ${isLarge && 'light'} absolute-center`}></div>
+                            !isMedium && <td className={styles.tempBar}>
+                                <div className={`vertical-dashed-line ${!isLarge && 'light'} absolute-center`}></div>
+                                <div className={`horizontal-dashed-line ${!isLarge && 'light'} absolute-center`}></div>
 
                                 <div className={styles.left} style={getTempBarStyle(day, "left")}></div>
                                 <div className={styles.right} style={getTempBarStyle(day, "right")}></div>

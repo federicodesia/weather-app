@@ -14,7 +14,9 @@ import { useState } from 'react';
 
 function DarkPanel() {
 
-  const isLarge = useMediaQuery('(min-width: 801px)')
+  const minWidth = useMediaQuery('(min-width: 1201px)')
+  const minHeight = useMediaQuery('(min-height: 801px)')
+  const isLarge = minWidth && minHeight
 
   const selectedCity = useSelectedCity()
   const { data, weather } = selectedCity ?? {}

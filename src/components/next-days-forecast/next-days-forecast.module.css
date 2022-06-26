@@ -76,7 +76,8 @@
     padding-right: 0;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px),
+(max-height: 800px) {
     .table td {
         font-weight: 400;
         color: rgba(255, 255, 255, 0.75);
