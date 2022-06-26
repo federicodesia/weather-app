@@ -1,3 +1,4 @@
+import useMediaQuery from '../../hooks/use-media-query';
 import { RainForecast } from '../../interfaces/forecast';
 import styles from './probability-rain.module.css';
 
@@ -6,6 +7,13 @@ type ProbabilityRainProps = {
 }
 
 function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
+
+    const minWidth = useMediaQuery('(min-width: 1201px)')
+    const minHeight = useMediaQuery('(min-height: 801px)')
+    const isLarge = minWidth && minHeight
+
+    const isMedium = useMediaQuery('(max-width: 640px)')
+    const isSmall = useMediaQuery('(max-width: 480px)')
 
     const getBarStyle = (item: RainForecast) => {
         return { height: `${item.pop * 100}%` }
@@ -24,7 +32,10 @@ function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
 
                 <div className={`${styles.barsContainer}`}>
                     {
-                        items.map((item, index) => {
+                        items.slice(0, isLarge || isSmall
+                            ? 6 : isMedium
+                                ? 8 : 10
+                        ).map((item, index) => {
                             return <div
                                 className='column'
                                 key={`${item.dt} ${index}`}>

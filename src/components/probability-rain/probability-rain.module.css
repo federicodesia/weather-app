@@ -1,5 +1,6 @@
 .container {
     --column-height: 125px;
+    --column-width: 40px;
 
     display: flex;
     flex-direction: column;
@@ -25,6 +26,7 @@
 .barContainer {
     position: relative;
     height: var(--column-height);
+    width: var(--column-width);
     margin-bottom: 20px;
 }
 

@@ -19,7 +19,7 @@ function forecastFromResponse(response: ForecastResponse): Forecast[] {
 }
 
 function rainForecast(forecasts: Forecast[]): RainForecast[] {
-    return forecasts.slice(0, 6).map(item => {
+    return forecasts.slice(0, 10).map(item => {
         return {
             dt: item.dt,
             pop: item.pop
