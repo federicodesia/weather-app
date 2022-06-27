@@ -36,80 +36,84 @@ function DarkPanel() {
         <IoMdCloudy size={100} id={styles.cloud3} />
       </div>
 
-      {
-        !isLarge && cityState.ongoingRequests > 0 && <div className='loading-bar' />
-      }
-
       <div className={styles.absoluteContent}>
 
-        <div className='column expand'>
-          {
-            !isLarge && <div className={styles.navBar}>
-              <MdShortText className={styles.drawerIcon} onClick={() => setDrawerExpanded(true)} />
-              <h4 className={styles.header}>Weather Forecast</h4>
-            </div>
-          }
-
-          <div className={styles.content}>
-            <div className={styles.currentWeather}>
-
-              <div className='row center-items'>
-                <div id={styles.todayIcon}>
-                  <WeatherIcon icon={icon} size={28} />
-                </div>
-
-                <div className='column'>
-                  <h3>Today</h3>
-                  <span id={styles.date}>
-                    {
-                      weather && new Date(weather.dt).toLocaleDateString('en-US', {
-                        weekday: 'short',
-                        month: 'short',
-                        day: 'numeric'
-                      })
-                    }
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.tempContainer}>
-                <div className='row'>
-                  <h1>{main?.temp}</h1>
-                  <h2>°C</h2>
-                </div>
-              </div>
-
-              <span>
-                {display([
-                  data?.name,
-                  data?.state,
-                  data?.country
-                ], 2)}
-              </span>
-
-              <div className='row center-items'>
-                <span>
-                  {`Feels like ${main?.feelsLike}`}
-                </span>
-                <span id={styles.dot}>•</span>
-                <span>
-                  {`Sunset ${sunset?.getHours()}:${sunset?.getMinutes()}`}
-                </span>
-              </div>
-            </div>
-
+        {
+          !isLarge && <div className={styles.navBarContainer}>
             {
-              !isLarge && <div className={styles.roundedContainer}>
-                <NextDaysForecast
-                  selectedCityId={selectedCity?.id}
-                  days={selectedCity?.forecast}
-                />
+              cityState.ongoingRequests > 0 && <div className={styles.floating} >
+                <div className='loading-bar' />
               </div>
             }
 
-            <div className={styles.roundedContainer} >
-              <ProbabilityRain items={selectedCity?.rainForecast} />
+            {
+              <div className={styles.navBar}>
+                <MdShortText className={styles.drawerIcon} onClick={() => setDrawerExpanded(true)} />
+                <h4 className={styles.header}>Weather Forecast</h4>
+              </div>
+            }
+          </div>
+        }
+
+        <div className={styles.content}>
+          <div className={styles.currentWeather}>
+
+            <div className='row center-items'>
+              <div id={styles.todayIcon}>
+                <WeatherIcon icon={icon} size={28} />
+              </div>
+
+              <div className='column'>
+                <h3>Today</h3>
+                <span id={styles.date}>
+                  {
+                    weather && new Date(weather.dt).toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      month: 'short',
+                      day: 'numeric'
+                    })
+                  }
+                </span>
+              </div>
             </div>
+
+            <div className={styles.tempContainer}>
+              <div className='row'>
+                <h1>{main?.temp}</h1>
+                <h2>°C</h2>
+              </div>
+            </div>
+
+            <span>
+              {display([
+                data?.name,
+                data?.state,
+                data?.country
+              ], 2)}
+            </span>
+
+            <div className='row center-items'>
+              <span>
+                {`Feels like ${main?.feelsLike}`}
+              </span>
+              <span id={styles.dot}>•</span>
+              <span>
+                {`Sunset ${sunset?.getHours()}:${sunset?.getMinutes()}`}
+              </span>
+            </div>
+          </div>
+
+          {
+            !isLarge && <div className={styles.roundedContainer}>
+              <NextDaysForecast
+                selectedCityId={selectedCity?.id}
+                days={selectedCity?.forecast}
+              />
+            </div>
+          }
+
+          <div className={styles.roundedContainer} >
+            <ProbabilityRain items={selectedCity?.rainForecast} />
           </div>
         </div>
       </div>
