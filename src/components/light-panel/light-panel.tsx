@@ -44,11 +44,11 @@ function LightPanel() {
 
           <div className={styles.header}>
             <h2>Weather </h2>
-            <h2 className='bold-h2'>Forecast</h2>
+            <h2 className='bold'>Forecast</h2>
           </div>
         </div>
 
-        <div className='horizontal-scroll start'>
+        <div className={styles.horizontalScroll}>
           {
             cityState.cities.map(city => <CityCard
               key={city.id}
@@ -57,11 +57,10 @@ function LightPanel() {
           }
         </div>
 
-        <div className='horizontal-scroll column'>
+        <div className={styles.horizontalScroll}>
           <NextDaysForecast
             selectedCityId={selectedCity?.id}
-            days={selectedCity?.forecast}
-          />
+            days={selectedCity?.forecast} />
         </div>
       </div>
     </div>

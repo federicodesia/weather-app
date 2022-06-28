@@ -1,6 +1,7 @@
 .container {
     display: grid;
     width: 680px;
+    background-color: var(--lightpanel-bg-color);
 }
 
 .absoluteContent,
@@ -32,4 +33,12 @@
 
 .header * {
     display: inline;
+}
+
+.horizontalScroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0px 40px;
+    padding-bottom: 18px;
 }

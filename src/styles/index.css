@@ -33,7 +33,7 @@ h2 {
   font-weight: 300;
 }
 
-.bold-h2 {
+h2.bold {
   font-size: 30px;
   font-weight: 700;
 }
@@ -59,7 +59,7 @@ h5 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B9BDBF;
+  background: var(--light-scrollbar-color);
   background-clip: content-box;
   border: 5px solid transparent;
   border-radius: 10px;
@@ -75,32 +75,10 @@ h5 {
   flex-direction: column;
 }
 
-.center-items {
+.row.center,
+.column.center {
   justify-content: center;
   align-items: center;
-}
-
-.column.expand {
-  height: 100%;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-.horizontal-scroll {
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 24px;
-  overflow-x: auto;
-
-  padding: 0px 40px;
-  padding-bottom: 18px;
-  justify-content: stretch;
-}
-
-.horizontal-scroll.start {
-  justify-content: start;
 }
 
 .absolute-center {

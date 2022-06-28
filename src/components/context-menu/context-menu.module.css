@@ -21,7 +21,7 @@ li {
 }
 
 .icon {
-    color: #737373;
+    color: var(--contextmenu-icon-color);
     margin-right: 16px;
     height: var(--icon-size);
     width: var(--icon-size);
@@ -34,13 +34,13 @@ li {
 
 li.enabled:hover {
     cursor: pointer;
-    background-color: #EEEEEE;
+    background-color: var(--light-hover-color);
 }
 
 li.disabled {
-    color: #9E9E9E;
+    color: var(--contextmenu-disabled-color);
 }
 
 li.disabled .icon {
-    color: #cccccc;
+    color: var(--contextmenu-disabled-icon-color);
 }

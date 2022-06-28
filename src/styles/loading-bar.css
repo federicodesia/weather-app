@@ -1,7 +1,7 @@
 .loading-bar {
     height: 5px;
     width: 100%;
-    background-color: #A1C2FA;
+    background-color: var(--loadingbar-track-color);
 
     position: relative;
     overflow: hidden;
@@ -15,7 +15,7 @@
 
     height: 5px;
     width: 50%;
-    background-color: #3B78E7;
+    background-color: var(--loadingbar-thumb-color);
 
     position: absolute;
     top: 0;

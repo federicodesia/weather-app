@@ -16,13 +16,13 @@
 
 .drawer.expanded {
     visibility: visible;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: var(--drawer-backdrop-color);
 }
 
 .menu {
     height: 100%;
-    color: rgba(255, 255, 255, 0.85);
-    background-color: #060711;
+    color: var(--dark-text-color);
+    background-color: var(--dark-bg-color);
 
     display: flex;
     flex-direction: column;
@@ -46,7 +46,7 @@
 }
 
 .scrolleableArea::-webkit-scrollbar-thumb {
-    background-color: #22232C;
+    background-color: var(--dark-scrollbar-color);
 }
 
 @media only screen and (min-width: 481px) {

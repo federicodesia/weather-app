@@ -24,7 +24,7 @@ function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
             <h4>Chance of rain</h4>
 
             <div className='row'>
-                <div className={`column space-between ${styles.weatherColumn}`}>
+                <div className={`column ${styles.weatherColumn}`}>
                     <span>heavy rain</span>
                     <span>rainy</span>
                     <span>sunny</span>

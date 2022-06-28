@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-import './theme/theme.css';
-import './theme/dashed-line.css';
-import './theme/loading-bar.css';
+import './styles/index.css';
+import './styles/constants.css';
+import './styles/dashed-line.css';
+import './styles/loading-bar.css';
 
 import './utils/number'
 import './utils/array'

@@ -58,7 +58,7 @@ function DarkPanel() {
         <div className={styles.content}>
           <div className={styles.currentWeather}>
 
-            <div className='row center-items'>
+            <div className='row center'>
               <div id={styles.todayIcon}>
                 <WeatherIcon icon={icon} size={28} />
               </div>
@@ -92,7 +92,7 @@ function DarkPanel() {
               ], 2)}
             </span>
 
-            <div className='row center-items'>
+            <div className='row center'>
               <span>
                 {`Feels like ${main?.feelsLike}`}
               </span>

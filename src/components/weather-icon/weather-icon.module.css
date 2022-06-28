@@ -1,5 +1,5 @@
 .weatherIcon {
-    color: #4394EC;
+    color: var(--primary-color);
 }
 
 .weatherIcon * {

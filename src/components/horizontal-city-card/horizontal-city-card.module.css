@@ -1,7 +1,7 @@
 .container {
     margin: 0;
 
-    background-color: #0A0B16;
+    background-color: var(--dark-content-bg-color);
     padding: 24px;
     border-radius: 12px;
 
@@ -38,7 +38,7 @@
 }
 
 .check {
-    color: #4394EC;
+    color: var(--primary-color);
     height: 0px;
     width: 0px;
     min-height: 0px;

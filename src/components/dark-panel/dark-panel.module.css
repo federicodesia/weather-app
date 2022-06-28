@@ -1,9 +1,8 @@
 .container {
     --navbar-height: 80px;
-    --bg-color: #0E0F30;
 
     position: relative;
-    background-color: var(--bg-color);
+    background-color: var(--darkpanel-bg-color);
     color: white;
 
     min-width: 400px;
@@ -44,7 +43,7 @@
     right: 0;
     box-sizing: border-box;
     height: var(--navbar-height);
-    background-color: var(--bg-color);
+    background-color: var(--darkpanel-bg-color);
 
     display: grid;
 }
@@ -111,7 +110,7 @@
 }
 
 .clouds {
-    color: rgba(30, 29, 70, 0.75);
+    color: var(--darkpanel-clouds-color);
     position: relative;
 }
 
@@ -146,7 +145,8 @@
     .container {
         height: 100%;
         min-width: 100%;
-        background: linear-gradient(#0E0F30 0%, #0B0C1E 100%);
+        background: linear-gradient(var(--darkpanel-gradient-top) 0%,
+                var(--darkpanel-gradient-bottom) 100%);
     }
 
     .absoluteContent {
@@ -154,7 +154,7 @@
     }
 
     .absoluteContent::-webkit-scrollbar-thumb {
-        background-color: #2D2E4A
+        background-color: var(--darkpanel-scrollbar-color)
     }
 
     .content {
@@ -172,7 +172,7 @@
 
         padding: 24px;
         border-radius: 24px;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: var(--darkpanel-content-bg-color);
         overflow: hidden;
     }
 

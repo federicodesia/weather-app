@@ -34,7 +34,7 @@
 }
 
 #waterIcon {
-    color: #4394EC;
+    color: var(--primary-color);
     margin-bottom: 3px;
     margin-right: 4px;
 }

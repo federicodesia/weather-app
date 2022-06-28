@@ -75,12 +75,12 @@
 
 .suggestionsContainer li:hover,
 .suggestionsContainer .focused {
-  background-color: #EEEEEE;
+  background-color: var(--light-hover-color);
 }
 
 @media only screen and (max-width: 1200px) {
   .content {
-    background-color: #0A0B16;
+    background-color: var(--dark-content-bg-color);
   }
 
   .expandedContent {
@@ -93,10 +93,10 @@
 
   .suggestionsContainer li:hover,
   .suggestionsContainer .focused {
-    background-color: rgba(255, 255, 255, 0.015);
+    background-color: var(--dark-hover-color);
   }
 
   .suggestionsContainer::-webkit-scrollbar-thumb {
-    background-color: #22232C;
+    background-color: var(--dark-scrollbar-color);
   }
 }
