@@ -2,9 +2,10 @@ import { ForecastResponse } from '../../interfaces/forecast';
 import { CityData } from '../../interfaces/city';
 import { WeatherResponse } from '../../interfaces/weather';
 import request from '../../utils/request';
+import readEnv from '../../utils/env';
 
 const baseUrl = 'https://api.openweathermap.org';
-const apiKey = '25f470fb61e57d9ef1dd1bcaa95c3b55';
+const apiKey = readEnv('REACT_APP_WEATHER_API_KEY');
 
 type tempUnits = 'standard' | 'metric' | 'imperial';
 
