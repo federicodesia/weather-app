@@ -13,7 +13,6 @@ import useSelectedCity from '../../hooks/use-selected-city';
 function LightPanel() {
 
   const { cityState, searchCity, addCity } = useContext(CityContext)
-  const selectedCity = useSelectedCity()
 
   const suggestions = cityState.searchSuggestions?.map(city => {
     return {
@@ -58,9 +57,7 @@ function LightPanel() {
         </div>
 
         <div className={styles.horizontalScroll}>
-          <NextDaysForecast
-            selectedCityId={selectedCity?.id}
-            days={selectedCity?.forecast} />
+          <NextDaysForecast />
         </div>
       </div>
     </div>

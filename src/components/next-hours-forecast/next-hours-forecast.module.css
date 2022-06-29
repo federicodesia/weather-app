@@ -1,0 +1,26 @@
+.hours{
+    padding: 0px 24px;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 24px;
+    overflow-x: auto;
+    justify-content: stretch;
+
+    scrollbar-width: none;
+}
+
+.hours::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.hours li{
+    padding: 0;
+    min-width: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}

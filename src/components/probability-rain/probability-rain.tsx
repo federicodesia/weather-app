@@ -1,12 +1,11 @@
 import useMediaQuery from '../../hooks/use-media-query';
-import { RainForecast } from '../../interfaces/forecast';
+import useSelectedCity from '../../hooks/use-selected-city';
+import { Forecast } from '../../interfaces/forecast';
 import styles from './probability-rain.module.css';
 
-type ProbabilityRainProps = {
-    items?: RainForecast[]
-}
-
-function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
+function ProbabilityRain() {
+    const selectedCity = useSelectedCity()
+    const items = selectedCity?.hourlyForecast ?? []
 
     const minWidth = useMediaQuery('(min-width: 1201px)')
     const minHeight = useMediaQuery('(min-height: 801px)')
@@ -15,7 +14,7 @@ function ProbabilityRain({ items = [] }: ProbabilityRainProps) {
     const isMedium = useMediaQuery('(max-width: 640px)')
     const isSmall = useMediaQuery('(max-width: 480px)')
 
-    const getBarStyle = (item: RainForecast) => {
+    const getBarStyle = (item: Forecast) => {
         return { height: `${item.pop * 100}%` }
     }
 

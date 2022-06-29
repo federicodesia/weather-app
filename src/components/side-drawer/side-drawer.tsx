@@ -36,7 +36,7 @@ function SideDrawer({ isExpanded, onClose }: SideDrawerProps) {
     useEffect(() => {
         clearCityAction()
     }, [isExpanded])
-
+ 
     const suggestions = cityState.searchSuggestions?.map(city => {
         return {
             item: city,
@@ -46,7 +46,9 @@ function SideDrawer({ isExpanded, onClose }: SideDrawerProps) {
 
     return (
         <div className={`${styles.drawer} ${isExpanded && styles.expanded}`}>
-            <div className={styles.menu} ref={menuRef}>
+
+            <div className={styles.menu} />
+            <div className={styles.fixedMenu} ref={menuRef}>
 
                 <div className={styles.header}>
                     <IoChevronBack

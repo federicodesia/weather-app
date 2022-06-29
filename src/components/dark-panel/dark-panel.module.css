@@ -38,6 +38,9 @@
 }
 
 .navBarContainer {
+    z-index: 1;
+    margin-right: 15px;
+
     position: fixed;
     left: 0;
     right: 0;
@@ -145,7 +148,7 @@
     .container {
         height: 100%;
         min-width: 100%;
-        background: linear-gradient(var(--darkpanel-gradient-top) 0%,
+        background: linear-gradient(var(--darkpanel-gradient-top) var(--navbar-height),
                 var(--darkpanel-gradient-bottom) 100%);
     }
 
@@ -174,6 +177,10 @@
         border-radius: 24px;
         background-color: var(--darkpanel-content-bg-color);
         overflow: hidden;
+    }
+
+    .roundedContainer.scrolleable {
+        padding: 24px 0px;
     }
 
     .currentWeather {

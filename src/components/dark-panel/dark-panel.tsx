@@ -8,10 +8,11 @@ import WeatherIcon from '../weather-icon/weather-icon';
 import ProbabilityRain from '../probability-rain/probability-rain';
 import useMediaQuery from '../../hooks/use-media-query';
 import { MdShortText } from 'react-icons/md';
-import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 import SideDrawer from '../side-drawer/side-drawer';
 import { useContext, useState } from 'react';
 import { CityContext } from '../../context/city-context/city-context';
+import NextHoursForecast from '../next-hours-forecast/next-hours-forecast';
+import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 
 function DarkPanel() {
 
@@ -104,17 +105,20 @@ function DarkPanel() {
           </div>
 
           {
-            !isLarge && <div className={styles.roundedContainer}>
-              <NextDaysForecast
-                selectedCityId={selectedCity?.id}
-                days={selectedCity?.forecast}
-              />
+            !isLarge && <div className={`${styles.roundedContainer} ${styles.scrolleable}`}>
+              <NextHoursForecast />
             </div>
           }
 
           <div className={styles.roundedContainer} >
-            <ProbabilityRain items={selectedCity?.rainForecast} />
+            <ProbabilityRain />
           </div>
+
+          {
+            !isLarge && <div className={styles.roundedContainer}>
+              <NextDaysForecast />
+            </div>
+          }
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Forecast, ForecastResponse, RainForecast } from "../../interfaces/forecast"
+import { Forecast, ForecastResponse } from "../../interfaces/forecast"
 import average from "../average";
 import groupBy from "../group-by";
 import getMostFrequent from "../most-frecuent";
@@ -11,17 +11,9 @@ function forecastFromResponse(response: ForecastResponse): Forecast[] {
             icon: weather[0].icon,
             cnt: 0,
             dt: item.dt.dateWithTimezone(response.city.timezone),
+            temp: main.temp,
             tempMin: main.temp_min,
             tempMax: main.temp_max,
-            pop: item.pop
-        }
-    })
-}
-
-function rainForecast(forecasts: Forecast[]): RainForecast[] {
-    return forecasts.slice(0, 10).map(item => {
-        return {
-            dt: item.dt,
             pop: item.pop
         }
     })
@@ -36,6 +28,7 @@ function daysForecast(forecasts: Forecast[]) {
                 icon: getMostFrequent(value, item => item.icon)?.icon ?? '',
                 cnt: value.length,
                 dt: new Date(key).getTime(),
+                temp: average(value, item => item.temp).round(),
                 tempMin: Math.min(...value.map(item => item.tempMin)).round(),
                 tempMax: Math.max(...value.map(item => item.tempMax)).round(),
                 pop: (average(value, item => item.pop) * 100).round()
@@ -51,4 +44,4 @@ function daysForecast(forecasts: Forecast[]) {
     return daysForecast
 }
 
-export { forecastFromResponse, daysForecast, rainForecast }
+export { forecastFromResponse, daysForecast }

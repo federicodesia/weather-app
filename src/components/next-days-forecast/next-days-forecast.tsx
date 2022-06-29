@@ -6,13 +6,11 @@ import clamp from '../../utils/clamp';
 import { Forecast } from '../../interfaces/forecast';
 import WeatherIcon from '../weather-icon/weather-icon';
 import useMediaQuery from '../../hooks/use-media-query';
+import useSelectedCity from '../../hooks/use-selected-city';
 
-type NextDaysForecastProps = {
-    selectedCityId?: number
-    days?: Forecast[]
-}
-
-function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) {
+function NextDaysForecast() {
+    const selectedCity = useSelectedCity()
+    const days = selectedCity?.daysForecast ?? []
 
     const minWidth = useMediaQuery('(min-width: 1201px)')
     const minHeight = useMediaQuery('(min-height: 801px)')
@@ -61,7 +59,7 @@ function NextDaysForecast({ selectedCityId, days = [] }: NextDaysForecastProps) 
         <table className={styles.table}>
             <tbody>
                 {days.map((day) => {
-                    return <tr key={`${selectedCityId} ${day.dt}`}>
+                    return <tr key={`${selectedCity?.id} ${day.dt}`}>
                         <th>
                             {displayDay(day.dt)}
                         </th>

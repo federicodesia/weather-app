@@ -3,6 +3,7 @@
     flex-direction: column;
 
     min-width: 130px;
+    max-width: 130px;
     height: 200px;
 
     text-align: center;

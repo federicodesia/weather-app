@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef } from 'react';
 import { City, CityData, CityState, initialCities } from '../../interfaces/city';
 import { getCities, getForecast, getWeather } from '../../services/weather/weather-service';
 import { awaitAtLeast } from '../../utils/await-at-least';
-import { daysForecast, forecastFromResponse, rainForecast } from '../../utils/converters/forecast-converter';
+import { daysForecast, forecastFromResponse } from '../../utils/converters/forecast-converter';
 import weatherFromResponse from '../../utils/converters/weather-converter';
 import { readLocalStorage, writeLocalStorage } from '../../utils/local-storage';
 import { CityContext } from './city-context';
@@ -128,8 +128,8 @@ export const CityProvider = ({ children }: CityProviderProps) => {
             data: data,
             updatedAt: new Date().getTime(),
             weather: weatherFromResponse(weatherResponse),
-            forecast: daysForecast(forecast),
-            rainForecast: rainForecast(forecast)
+            daysForecast: daysForecast(forecast),
+            hourlyForecast: forecast.slice(0, 10),
         }
     }
 
