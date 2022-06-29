@@ -1,4 +1,3 @@
-import { IoWater } from 'react-icons/io5';
 import useSelectedCity from '../../hooks/use-selected-city';
 import WeatherIcon from '../weather-icon/weather-icon';
 import styles from './next-hours-forecast.module.css';
@@ -16,7 +15,7 @@ function NextHoursForecast() {
                     hour12: false
                 })
 
-                return <li>
+                return <li key={`${selectedCity?.id} ${hour.dt}`}>
                     <span>{date}</span>
                     <WeatherIcon icon={hour.icon} />
                     <span>{`${Math.round(hour.temp)}°`}</span>

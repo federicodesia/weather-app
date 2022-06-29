@@ -10,6 +10,11 @@ export interface WeatherResponse {
         feels_like: number
         temp_min: number
         temp_max: number
+        humidity: number
+    }
+    visibility: number
+    wind: {
+        speed: number
     }
     dt: number
     sys: {
@@ -26,7 +31,10 @@ export interface Weather {
         feelsLike: number
         tempMin: number
         tempMax: number
+        humidity: number
     }
+    visibility: number
+    windSpeed: number
     dt: number
     sys: {
         sunrise: number

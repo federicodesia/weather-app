@@ -171,7 +171,7 @@
     .roundedContainer {
         box-sizing: border-box;
         width: 100%;
-        max-width: 800px;
+        max-width: 720px;
 
         padding: 24px;
         border-radius: 24px;

@@ -13,6 +13,7 @@ import { useContext, useState } from 'react';
 import { CityContext } from '../../context/city-context/city-context';
 import NextHoursForecast from '../next-hours-forecast/next-hours-forecast';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
+import DayDetails from '../day-details/day-details';
 
 function DarkPanel() {
 
@@ -113,6 +114,12 @@ function DarkPanel() {
           <div className={styles.roundedContainer} >
             <ProbabilityRain />
           </div>
+
+          {
+            !isLarge && <div className={styles.roundedContainer}>
+              <DayDetails />
+            </div>
+          }
 
           {
             !isLarge && <div className={styles.roundedContainer}>
