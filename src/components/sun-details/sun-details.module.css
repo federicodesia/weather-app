@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.graph {
+    --graph-size: 150px;
+    --sun-size: 20px;
+    --sun-margin: 10px;
+
+    min-width: var(--graph-size);
+    margin-top: calc(-1 * var(--sun-margin));
+    padding: var(--sun-margin);
+    padding-bottom: 0;
+
+    height: 70px;
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    height: var(--graph-size);
+}
+
+.sun {
+    width: var(--sun-size);
+    height: var(--sun-size);
+    color: #F8C500;
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.curvedLine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-top: solid 1.5px rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sunLight {
+    width: 100%;
+    box-shadow: rgba(255, 255, 255, 0.03) -24px 24px 24px 24px;
+}

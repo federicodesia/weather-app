@@ -8,7 +8,6 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { useContext } from 'react';
 import { CityContext } from '../../context/city-context/city-context';
 import display from '../../utils/display';
-import useSelectedCity from '../../hooks/use-selected-city';
 
 function LightPanel() {
 

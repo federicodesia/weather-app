@@ -7,7 +7,7 @@ function NextHoursForecast() {
 
     return <ul className={styles.hours}>
         {
-            selectedCity?.hourlyForecast.map(hour => {
+            selectedCity.hourlyForecast.map(hour => {
 
                 const date = new Date(hour.dt).toLocaleTimeString('en-US', {
                     hour: '2-digit',

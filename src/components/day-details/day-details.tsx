@@ -5,7 +5,6 @@ import styles from './day-details.module.css';
 
 function DayDetails() {
     const selectedCity = useSelectedCity()
-    if(!selectedCity) return <div/>
 
     return <div className={styles.container}>
         <div className={styles.detail} >

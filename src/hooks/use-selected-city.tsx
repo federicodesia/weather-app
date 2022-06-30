@@ -1,5 +1,6 @@
 import { useContext, useMemo } from 'react'
 import { CityContext } from '../context/city-context/city-context'
+import { City } from '../interfaces/city'
 
 function useSelectedCity() {
 
@@ -9,7 +10,7 @@ function useSelectedCity() {
     const selectedCity = useMemo(
         () => cities.find(
             city => city.id === selectedCityId
-        ), [cities, selectedCityId]
+        ) as City, [cities, selectedCityId]
     )
 
     return selectedCity

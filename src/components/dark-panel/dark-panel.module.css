@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: stretch;
     padding: 48px 40px;
-    gap: 24px;
+    gap: 12px;
 }
 
 .navBarContainer {

@@ -5,7 +5,7 @@ import styles from './probability-rain.module.css';
 
 function ProbabilityRain() {
     const selectedCity = useSelectedCity()
-    const items = selectedCity?.hourlyForecast ?? []
+    const items = selectedCity.hourlyForecast
 
     const minWidth = useMediaQuery('(min-width: 1201px)')
     const minHeight = useMediaQuery('(min-height: 801px)')

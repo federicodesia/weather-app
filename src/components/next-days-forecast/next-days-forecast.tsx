@@ -10,7 +10,7 @@ import useSelectedCity from '../../hooks/use-selected-city';
 
 function NextDaysForecast() {
     const selectedCity = useSelectedCity()
-    const days = selectedCity?.daysForecast ?? []
+    const days = selectedCity.daysForecast
 
     const minWidth = useMediaQuery('(min-width: 1201px)')
     const minHeight = useMediaQuery('(min-height: 801px)')

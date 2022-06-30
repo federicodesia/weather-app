@@ -14,6 +14,7 @@ import { CityContext } from '../../context/city-context/city-context';
 import NextHoursForecast from '../next-hours-forecast/next-hours-forecast';
 import NextDaysForecast from '../next-days-forecast/next-days-forecast';
 import DayDetails from '../day-details/day-details';
+import SunDetails from '../sun-details/sun-details';
 
 function DarkPanel() {
 
@@ -23,8 +24,8 @@ function DarkPanel() {
 
   const { cityState } = useContext(CityContext)
   const selectedCity = useSelectedCity()
-  const { data, weather } = selectedCity ?? {}
-  const { icon, main, sys } = weather ?? {}
+  const { data, weather } = selectedCity
+  const { icon, main, sys } = weather
 
   const sunset = sys ? new Date(sys.sunset) : undefined
 
@@ -114,6 +115,12 @@ function DarkPanel() {
           <div className={styles.roundedContainer} >
             <ProbabilityRain />
           </div>
+
+          {
+            !isLarge && <div className={styles.roundedContainer}>
+              <SunDetails />
+            </div>
+          }
 
           {
             !isLarge && <div className={styles.roundedContainer}>
