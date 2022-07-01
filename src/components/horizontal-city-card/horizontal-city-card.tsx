@@ -20,7 +20,7 @@ function HorizontalCityCard({ city, isChecked, onSelect, onLongPress }: Horizont
     });
 
     return <div
-        className={styles.container}
+        className={`${styles.container} unselectable`}
         {...handleLongPress}>
 
         {
